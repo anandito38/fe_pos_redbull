@@ -37,24 +37,20 @@
     $browser = getBrowser();
     $browserVersion = getBrowserVersion();
 @endphp
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="h3 mb-4 text-gray-800 bold-text">Selamat Datang di Kang Bakery</h1>
-            <div class="card mb-4 py-3 border-bottom-warning">
-                <div class="card-body">
-                    {{-- @foreach ($data as $val)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="h3 mb-4 text-gray-800 bold-text">Selamat Datang di Kang Bakery</h1>
+                <div class="card mb-4 py-3 border-bottom-warning">
+                    <div class="card-body">
+                        {{-- @foreach ($data as $val)
                     <p>
                         {{$val}}
                     </p>
                     @endforeach --}}
-                    <h5>
+                    <p>
                         ANANDITOSA
-                    </h5>
-                    <h5>
-                        Browser: {{$browser}}, Version: {{$browserVersion}}
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>
