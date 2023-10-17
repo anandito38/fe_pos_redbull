@@ -36,6 +36,9 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
+                                        <p>
+                                            <img src="{{ asset('img/LogoKB.png')}}" width="100px" alt="">
+                                        </p>
                                         <h1 class="h4 text-gray-900 mb-4">KANG BAKERY</h1>
                                     </div>
                                     <form class="user" method="POST" action="/login">
