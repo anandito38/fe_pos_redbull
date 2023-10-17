@@ -1,0 +1,15 @@
+.black-text{
+    color: black;
+}
+
+.bold-text{
+    font-weight: 900;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.nowrap {
+    white-space:nowrap;
+}
