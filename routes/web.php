@@ -17,6 +17,12 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/login', function () {
-    return view('Auth.login');
+Route::group([], function(){
+    Route::get('/login', function () {
+        return view('Auth.login');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
