@@ -29,4 +29,8 @@ Route::group([], function(){
     Route::get('/customer', function () {
         return view('master.customer');
     });
+
+    Route::get('/404', function () {
+        return view('error.404');
+    });
 });

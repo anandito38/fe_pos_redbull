@@ -155,6 +155,8 @@
                     <div class="float-left black-text">
                         @if (url('/dashboard') == url()->current())
                             <h5>DASHBOARD</h5>
+                        @elseif (url('/admin') == url()->current())
+                            <h5>ADMIN SHEET INFORMATION</h5>
                         @elseif (url('/customer') == url()->current())
                             <h5>CUSTOMER SHEET INFORMATION</h5>
                         @endif
