@@ -25,4 +25,8 @@ Route::group([], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/customer', function () {
+        return view('master.customer');
+    });
 });

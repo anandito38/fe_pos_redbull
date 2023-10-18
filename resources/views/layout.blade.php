@@ -21,6 +21,9 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/support-index.css') }}" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -46,7 +49,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>DASHBOARD</span></a>
             </li>
 
             <!-- Divider -->
@@ -56,14 +59,19 @@
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fas fa-fw fa-people-group"></i>
+                    <span>USER MODULE</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
+                        <a class="collapse-item" href="/admin">
+                            <i class="fa-solid fa-user-gear" style="margin-right: 5px;"></i>ADMIN SHEET
+                        </a>
+                        <a class="collapse-item" href="/customer">
+                            <i class="fa-solid fa-user-group" style="margin-right: 5px;"></i>CUSTOMER SHEET
+                        </a>
+
                     </div>
                 </div>
             </li>
@@ -147,6 +155,8 @@
                     <div class="float-left black-text">
                         @if (url('/dashboard') == url()->current())
                             <h5>DASHBOARD</h5>
+                        @elseif (url('/customer') == url()->current())
+                            <h5>CUSTOMER SHEET INFORMATION</h5>
                         @endif
                     </div>
                     <!-- Sidebar Toggle (Topbar) -->
@@ -246,6 +256,13 @@
 
         <!-- Custom scripts for all pages-->
         <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+        <!-- Page level plugins -->
+        <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
 </body>
 

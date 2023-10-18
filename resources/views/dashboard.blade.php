@@ -66,6 +66,7 @@
                         <p>
                             ANANDITOSA
                         </p>
+                        <p>Browser: {{$browser}}, Versi: {{$browserVersion}}</p>
                     </div>
                 </div>
             </div>

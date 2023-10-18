@@ -37,7 +37,7 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <p>
-                                            <img src="{{ asset('img/LogoKB.png') }}" width="100px" alt="">
+                                            <img src="{{ asset('img/LogoKB.png') }}" width="140px" alt="">
                                         </p>
                                         <h1 class="h4 text-gray-900 mb-4">KANG BAKERY</h1>
                                     </div>
@@ -60,7 +60,6 @@
                                         </button>
 
                                     </form>
-
                                 </div>
                             </div>
                         </div>
