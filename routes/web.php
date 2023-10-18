@@ -33,4 +33,12 @@ Route::group([], function(){
     Route::get('/404', function () {
         return view('error.404');
     });
+
+    Route::get('/addcart', function () {
+        return view('checkout.cart');
+    });
+
+    Route::get('/checkout', function () {
+        return view('checkout.co');
+    });
 });
