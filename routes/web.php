@@ -30,6 +30,10 @@ Route::group([], function(){
         return view('master.customer');
     });
 
+    Route::get('/admin', function () {
+        return view('master.admin');
+    });
+
     Route::get('/404', function () {
         return view('error.404');
     });
