@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('css/co-style.css') }}">
 </head>
+
 <body>
 
     <div class="container">
         <header>
             <h1>LIST PRODUCT</h1>
             <div class="iconCart">
-                <img src="icon.png">
+                <img src="{{ asset('img/cart.png') }}">
                 <div class="totalQuantity">0</div>
             </div>
         </header>
@@ -20,9 +22,9 @@
         <div class="listProduct">
 
             <div class="item">
-                <img src="images/1.webp" alt="">
-                <h2>CoPilot / Black / Automatic</h2>
-                <div class="price">$550</div>
+                <img src="{{ asset('img/mochi.jpg') }}">
+                <h2>Mochi Kimochi Enak Sangat</h2>
+                <div class="price">IDR 11.000</div>
                 <button>Add To Cart</button>
             </div>
 
@@ -64,7 +66,8 @@
     </div>
 
 
-    <script src="app.js"></script>
+    <script src="{{ asset('js/co-app.js') }}"></script>
 
 </body>
+
 </html>
