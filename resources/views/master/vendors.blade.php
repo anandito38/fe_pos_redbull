@@ -15,7 +15,7 @@
                 <div class="col">
                     <button type="button" class="btn-sm btn-success bold-text mt-4 float-right ml-2" data-toggle="modal"
                         data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
-                        Add Customer
+                        Add Vendor
                     </button>
                     <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i class="fa-solid fa-eye"></i>
                         Show All
@@ -28,7 +28,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold black-text">CUSTOMER SHEET</h6>
+            <h6 class="m-0 font-weight-bold black-text">VENDOR SHEET</h6>
         </div>
         <div class="card-body black-text">
             <div class="table-responsive">
@@ -36,10 +36,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Full Name</th>
-                            <th>Nickname</th>
-                            <th>Phone Number</th>
-                            <th>Adress</th>
+                            <th>Material Name</th>
+                            <th>Brand</th>
+                            <th>Quantity</th>
+                            <th>Capital Price</th>
+                            <th>Price per Item</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -47,10 +48,11 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>ANANDITO SATRIA ASYRAF</td>
-                            <td>ANANDITO</td>
-                            <td>0822xxxx9554</td>
-                            <td>Sukabirus F10</td>
+                            <td>Iphone 13</td>
+                            <td>Apple</td>
+                            <td>2</td>
+                            <td>Rp. 10,000,000</td>
+                            <td>Rp. 5,000,000</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
@@ -64,7 +66,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Customer</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Vendor</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -148,7 +150,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Customer</h5>
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Vendor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

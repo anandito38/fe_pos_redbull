@@ -36,12 +36,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>No Telp</th>
-                            <th>Alamat</th>
+                            <th>Full Name</th>
+                            <th>Nickname</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
                             <th>Role</th>
-                            <th>Status</th>
-                            <th>Terakhir Login</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -49,12 +48,11 @@
                     <tbody>
                         <tr>
                             <td>1</td>
+                            <td>ANANDITO SATRIA ASYRAF</td>
                             <td>ANANDITO</td>
                             <td>0822xxxx9554</td>
-                            <td>Sukabirus F10</td>
+                            <td>Jln. Sukabirus F10</td>
                             <td>Administrator</td>
-                            <td>Active</td>
-                            <td>25/04/2023 17:15:30</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"

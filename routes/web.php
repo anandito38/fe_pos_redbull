@@ -34,6 +34,14 @@ Route::group([], function(){
         return view('master.admin');
     });
 
+    Route::get('/vendors', function () {
+        return view('master.vendors');
+    });
+
+    Route::get('/product', function () {
+        return view('master.product');
+    });
+
     Route::get('/404', function () {
         return view('error.404');
     });

@@ -15,7 +15,7 @@
                 <div class="col">
                     <button type="button" class="btn-sm btn-success bold-text mt-4 float-right ml-2" data-toggle="modal"
                         data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
-                        Add Customer
+                        Add Product
                     </button>
                     <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i class="fa-solid fa-eye"></i>
                         Show All
@@ -28,7 +28,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold black-text">CUSTOMER SHEET</h6>
+            <h6 class="m-0 font-weight-bold black-text">PRODUCT SHEET</h6>
         </div>
         <div class="card-body black-text">
             <div class="table-responsive">
@@ -36,10 +36,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Full Name</th>
-                            <th>Nickname</th>
-                            <th>Phone Number</th>
-                            <th>Adress</th>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Capital Price</th>
+                            <th>Selling Price</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -47,10 +47,10 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>ANANDITO SATRIA ASYRAF</td>
-                            <td>ANANDITO</td>
-                            <td>0822xxxx9554</td>
-                            <td>Sukabirus F10</td>
+                            <td>MCH-DFK-COCHO</td>
+                            <td>MOCHI DAIFUKU CHOCHOLATE</td>
+                            <td>Rp. 7,000</td>
+                            <td>Rp. 11,000</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
@@ -64,7 +64,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Customer</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Product</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -148,7 +148,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Customer</h5>
+                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
