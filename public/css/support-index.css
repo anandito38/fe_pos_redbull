@@ -1,8 +1,8 @@
-.black-text{
+.black-text {
     color: black;
 }
 
-.bold-text{
+.bold-text {
     font-weight: 900;
 }
 
@@ -11,5 +11,9 @@
 }
 
 .nowrap {
-    white-space:nowrap;
+    white-space: nowrap;
+}
+
+.wrapper {
+    background-image: url(../img/login_bg3.jpg);
 }

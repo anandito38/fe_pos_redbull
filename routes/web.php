@@ -25,4 +25,32 @@ Route::group([], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/customer', function () {
+        return view('user.customer');
+    });
+
+    Route::get('/admin', function () {
+        return view('user.admin');
+    });
+
+    Route::get('/vendors', function () {
+        return view('stock.vendors');
+    });
+
+    Route::get('/product', function () {
+        return view('stock.product');
+    });
+
+    Route::get('/404', function () {
+        return view('error.404');
+    });
+
+    Route::get('/addcart', function () {
+        return view('checkout.cart');
+    });
+
+    Route::get('/checkout', function () {
+        return view('checkout.co');
+    });
 });
