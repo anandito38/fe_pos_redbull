@@ -86,6 +86,9 @@
                 <div id="collapseStock" class="collapse" aria-labelledby="headingStock"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/category">
+                            <i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i>CATEGORY SHEET
+                        </a>
                         <a class="collapse-item" href="/vendors">
                             <i class="fa-solid fa-box" style="margin-right: 5px;"></i>VENDOR SHEET
                         </a>

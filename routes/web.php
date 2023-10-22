@@ -42,6 +42,10 @@ Route::group([], function(){
         return view('stock.product');
     });
 
+    Route::get('/category', function () {
+        return view('stock.category');
+    });
+
     Route::get('/404', function () {
         return view('error.404');
     });
