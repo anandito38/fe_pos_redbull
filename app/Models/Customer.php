@@ -12,8 +12,11 @@ class Customers extends Model
     protected $fillable = [
         'fullName',
         'nickname',
-        'password',
         'phoneNumber',
         'address'
     ];
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }

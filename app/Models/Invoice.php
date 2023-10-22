@@ -10,12 +10,8 @@ class Invoices extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode',
-        'nickname',
-        'password',
-        'phoneNumber',
-        'address',
-        'role'
+        'kodeInvoice',
+        'tanggalPembelian'
     ];
 
     public function users(){

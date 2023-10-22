@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama',
+        'kode',
+        'hargaJual',
+        'quantity',
+    ];
+
+    public function bookings(){
+        return $this->belongsTo(Booking::class);
+    }
+
+    public function vendors(){
+        return $this->belongsTo(Vendor::class);
+    }
 }

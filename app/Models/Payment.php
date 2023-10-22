@@ -10,15 +10,15 @@ class Payments extends Model
     use HasFactory;
 
     protected $fillable = [
-        'kode',
-        'nickname',
-        'password',
-        'phoneNumber',
-        'address',
-        'role'
+        'totalHargaPembayaran',
+        'barcode'
     ];
 
     public function users(){
         return $this->belongsTo(User::class);
+    }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
     }
 }
