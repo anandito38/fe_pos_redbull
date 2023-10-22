@@ -12,7 +12,10 @@ class Bookings extends Model
     protected $fillable = [
         'quantity',
         'kode',
-        'totalHarga'
+        'totalHarga',
+
+        'customer_id',
+        'payment_id'
     ];
 
     public function customers(){
@@ -24,6 +27,6 @@ class Bookings extends Model
     }
 
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'booking_id', 'id');
     }
 }

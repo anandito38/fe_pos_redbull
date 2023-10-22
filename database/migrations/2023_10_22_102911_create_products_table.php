@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('kode');
-            $table->string('hargaJual')->nullable();
-            $table->string('quantity')->nullable();
+            $table->integer('hargaJual')->nullable();
+            $table->integer('quantity')->nullable();
 
-            $table->foreignId('booking_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('vendor_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

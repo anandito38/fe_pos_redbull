@@ -13,7 +13,9 @@ class Vendors extends Model
         'namaBarang',
         'merek',
         'quantity',
-        'hargaModal'
+        'hargaModal',
+
+        'category_id'
     ];
 
     public function categories(){
@@ -21,7 +23,7 @@ class Vendors extends Model
     }
 
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'vendor_id', 'id');
     }
 
 }

@@ -14,6 +14,9 @@ class Products extends Model
         'kode',
         'hargaJual',
         'quantity',
+
+        'booking_id',
+        'vendor_id'
     ];
 
     public function bookings(){

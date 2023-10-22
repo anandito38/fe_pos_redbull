@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('namaBarang');
             $table->string('merek');
-            $table->string('quantity')->nullable();
-            $table->string('hargaModal');
+            $table->integer('quantity')->nullable();
+            $table->integer('hargaModal');
 
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

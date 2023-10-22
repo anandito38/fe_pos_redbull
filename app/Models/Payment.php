@@ -11,7 +11,9 @@ class Payments extends Model
 
     protected $fillable = [
         'totalHargaPembayaran',
-        'barcode'
+        'barcode',
+
+        'admin_id'
     ];
 
     public function users(){
@@ -19,6 +21,6 @@ class Payments extends Model
     }
 
     public function bookings(){
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Booking::class, 'payment_id', 'id');
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('quantity');
             $table->string('kode');
-            $table->timestamp('totalHarga');
+            $table->bigInteger('totalHarga');
 
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade')->onUpdate('cascade');

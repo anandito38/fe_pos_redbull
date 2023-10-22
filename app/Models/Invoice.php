@@ -11,7 +11,9 @@ class Invoices extends Model
 
     protected $fillable = [
         'kodeInvoice',
-        'tanggalPembelian'
+        'tanggalPembelian',
+
+        'admin_id'
     ];
 
     public function users(){

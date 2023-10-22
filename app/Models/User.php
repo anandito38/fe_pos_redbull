@@ -47,10 +47,10 @@ class User extends Authenticatable
     ];
 
     public function invoices(){
-        return $this->hasMany(Invoice::class);
+        return $this->hasMany(Invoice::class, 'admin_id', 'id');
     }
 
     public function payments(){
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class, 'admin_id', 'id');
     }
 }
