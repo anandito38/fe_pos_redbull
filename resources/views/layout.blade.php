@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- ANANDITO TESTING -->
 <head>
 
     <meta charset="utf-8">
