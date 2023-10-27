@@ -27,7 +27,23 @@ Route::group([], function(){
     });
 
     Route::get('/customer', function () {
-        return view('master.customer');
+        return view('user.customer');
+    });
+
+    Route::get('/admin', function () {
+        return view('user.admin');
+    });
+
+    Route::get('/vendors', function () {
+        return view('stock.vendors');
+    });
+
+    Route::get('/product', function () {
+        return view('stock.product');
+    });
+
+    Route::get('/category', function () {
+        return view('stock.category');
     });
 
     Route::get('/404', function () {
