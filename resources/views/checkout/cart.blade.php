@@ -23,7 +23,21 @@
 
             <div class="item">
                 <img src="{{ asset('img/mochi.jpg') }}">
-                <h2>Mochi Kimochi Enak Sangat</h2>
+                <h2>Mochi</h2>
+                <div class="price">IDR 11.000</div>
+                <button>Add To Cart</button>
+            </div>
+
+            <div class="item">
+                <img src="{{ asset('img/mochi.jpg') }}">
+                <h2>Mochi</h2>
+                <div class="price">IDR 11.000</div>
+                <button>Add To Cart</button>
+            </div>
+
+            <div class="item">
+                <img src="{{ asset('img/mochi.jpg') }}">
+                <h2>Mochi</h2>
                 <div class="price">IDR 11.000</div>
                 <button>Add To Cart</button>
             </div>

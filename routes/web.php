@@ -39,6 +39,6 @@ Route::group([], function(){
     });
 
     Route::get('/checkout', function () {
-        return view('checkout.co');
+        return view('checkout.invoice');
     });
 });
