@@ -43,9 +43,9 @@
                                         @csrf
                                         <hr>
                                         <div class="form-group">
-                                            <input name="email" type="email" class="form-control form-control-user"
+                                            <input name="nickname" type="" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter Nickname...">
                                         </div>
                                         <div class="form-group">
                                             <input name="password" type="password"
