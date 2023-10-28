@@ -22,14 +22,12 @@ Route::get('/', function () {
 //     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // });
 
-// Route::middleware(['guest'])->group(function(){
-
-// });
-
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
-    Route::get('/dashboard', '')->name('dashboard');
-    // Route::get('/logout', 'logout')->name('logout');
+    Route::middleware(['auth:sanctum'])->group(function(){
+        Route::get('/dashboard', '')->name('dashboard');
+        Route::get('/logout', 'logout')->name('logout');
+    });
     // Route::post('/register', 'register')->name('register');
 });
 

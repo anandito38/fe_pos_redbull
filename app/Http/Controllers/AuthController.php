@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 
 use App\Services\Auth\GetUserInfoService;
@@ -54,7 +55,18 @@ class AuthController extends Controller
         try {
             $resultData = $this->loginService->login($request);
 
-            return redirect('/dashboard')->with('status', 'User logged in successfully');
+            $token = $resultData['token'];
+            $expiration = time() + 3600;
+            setcookie('token', $token, $expiration, '/', '', false, true);
+
+            if ($resultData['status'] == 'success') {
+                toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
+                return redirect('/dashboard');
+            } else {
+                toastr()->error('Invalid nickname or password!', 'Authentication', ['timeOut' => 3000]);
+                return view('Auth.login');
+            }
+
         } catch (Exception $error) {
             return response()->json([
                 'status' => 'error',
@@ -65,12 +77,15 @@ class AuthController extends Controller
 
     public function logout(Request $request) {
         try {
-            $request->user()->currentAccessToken()->delete();
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User logged out successfully',
-            ])->setStatusCode(200);
+            if(Auth::check()){
+                $request->user()->currentAccessToken()->delete();
+                setcookie('token','', time() + 3600, '/', '', false, true);
+                toastr()->info('Logout successfully!', 'Authentication', ['timeOut' => 3000]);
+                return redirect('/login');
+            }else{
+                toastr()->error('Logout unsuccessfully!', 'Authentication', ['timeOut' => 3000]);
+                return view('dashboard');
+            }
         } catch (Exception $error) {
             return response()->json([
                 'status' => 'error',

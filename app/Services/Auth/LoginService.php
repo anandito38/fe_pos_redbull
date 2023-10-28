@@ -39,13 +39,17 @@ class LoginService {
 
             return ([
                 'fullName' => $validUserDTO->getFullName(),
-                'nickname' => $validUserDTO->getnickname(),
+                'nickname' => $validUserDTO->getNickname(),
                 'role' => $validUserDTO->getRole(),
-                'token' => $validUserDTO->getToken()
+                'token' => $validUserDTO->getToken(),
+                'status' => 'success'
             ]);
 
         } catch (Exception $error) {
-            throw new Exception($error->getMessage());
+            return ([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ]);
         }
     }
 }
