@@ -18,29 +18,22 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-// Route::middleware(['auth:sanctum'])->group(function(){
-//     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-// });
-
-// Route::middleware(['guest'])->group(function(){
-
-// });
-
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
-    Route::get('/dashboard', '')->name('dashboard');
+    Route::post('/register', 'register')->name('register');
     Route::get('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
-    // Route::post('/register', 'register')->name('register');
 });
+
+
 
 Route::group([], function(){
     Route::get('/login', function () {
         return view('Auth.login');
-    });
+    })->middleware('is_TokenValid');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    });
+    })->middleware('is_Auth');
 
     Route::get('/customer', function () {
         return view('user.customer');
@@ -75,9 +68,20 @@ Route::group([], function(){
     });
 });
 
+// Route::post('/token-test', function() {
+//     try {
+//         return response()->json([
+//             'status' => 'success',
+//             'message' => 'Token is valid'
+//         ]);
+//     } catch (Exception $error) {
+//         return response()->json([
+//             'status' => 'error',
+//             'message' => $error->getMessage()
+//         ]);
+//     }
+// })->middleware('auth:sanctum');
+
 Route::any('{any}', function () {
-    return response()->json([
-        'status' => 'error',
-        'message' => 'Endpoint Not Found'
-    ])->setStatusCode(404);
+    return view('error.404');
 })->where('any', '.*');

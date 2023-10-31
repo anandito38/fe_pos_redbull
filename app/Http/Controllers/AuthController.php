@@ -6,11 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Session;
 use App\Services\Auth\GetUserInfoService;
 use App\Services\Auth\RegisterService;
 use App\Services\Auth\LoginService;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -22,16 +21,11 @@ class AuthController extends Controller
 
     public function getUserInfo(Request $request) {
         try {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User info retrieved successfully',
-                'data' => $this->getUserInfoService->getUserInfo($request)
-            ])->setStatusCode(200);
+            $userInfo = $this->getUserInfoService->getUserInfo($request);
+
+            return $userInfo;
         } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $error->getMessage(),
-            ])->setStatusCode(401);
+            throw new Exception($error->getMessage());
         }
     }
 
@@ -55,18 +49,20 @@ class AuthController extends Controller
     public function login(Request $request) {
         try {
             $resultData = $this->loginService->login($request);
+
+            $getUserInfo = $this->getUserInfoService->getUserInfo($request);
+            Session::put('userInfo', $getUserInfo);
+
             if($resultData['status'] == 'success'){
-                toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
+                toastr()->success('Login successfully!', 'Authentication', ['timeOut' => 3000]);
                 return Redirect::to('/dashboard')->withCookie(cookie('sanctum_token', $resultData['token']));
             }else{
-                toastr()->error('Login failed!', 'Authentication', ['timeOut' => 3000]);
+                toastr()->error('Please fill nickname and password!', 'Authentication', ['timeOut' => 3000]);
                 return view('Auth.login');
             }
         } catch (Exception $error) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $error->getMessage(),
-            ])->setStatusCode(401);
+            toastr()->error('Wrong nickname or password!', 'Authentication', ['timeOut' => 3000]);
+            return view('Auth.login');
         }
     }
 
@@ -76,6 +72,10 @@ class AuthController extends Controller
 
             if ($user) {
                 $user->tokens()->delete();
+
+                Session::forget('userInfo');
+                Session::flush();
+
                 toastr()->success('Logout successful', 'Authentication', ['timeOut' => 3000]);
                 return redirect()->route('login')->withCookie(cookie('sanctum_token', null, -1));
             } else {

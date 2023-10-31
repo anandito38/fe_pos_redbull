@@ -22,5 +22,15 @@ class UserSeeder extends Seeder
             'address' => 'Jl. Sukabirus F10',
             'role' => 'Administrator'
         ]);
+
+        User::create([
+            'fullName' => 'Atilla Fejril',
+            'nickname' => 'Atilla',
+            'password' => Hash::make('12345678'),
+            'phoneNumber' => '081234567870',
+            'address' => 'Jl. Sukabirus F30',
+            'role' => 'Administrator'
+        ]);
+
     }
 }
