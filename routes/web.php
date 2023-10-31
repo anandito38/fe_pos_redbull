@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,8 +25,6 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
 });
 
-
-
 Route::group([], function(){
     Route::get('/login', function () {
         return view('Auth.login');
@@ -34,14 +33,23 @@ Route::group([], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware('is_Auth');
+});
 
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/admin', [AdminController::class, 'getAllAdmin'])->name('admin');
+    Route::post('/admin/add', [AdminController::class, 'addAdmin']);
+    Route::put('/admin/edit', [AdminController::class, 'updateAdmin']);
+    Route::delete('/admin/delete', [AdminController::class, 'deleteAdmin']);
+});
+
+Route::group([], function(){
     Route::get('/customer', function () {
         return view('user.customer');
     });
 
-    Route::get('/admin', function () {
-        return view('user.admin');
-    });
+    // Route::get('/admin', function () {
+    //     return view('user.admin');
+    // });
 
     Route::get('/vendors', function () {
         return view('stock.vendors');
@@ -67,20 +75,6 @@ Route::group([], function(){
         return view('checkout.invoice');
     });
 });
-
-// Route::post('/token-test', function() {
-//     try {
-//         return response()->json([
-//             'status' => 'success',
-//             'message' => 'Token is valid'
-//         ]);
-//     } catch (Exception $error) {
-//         return response()->json([
-//             'status' => 'error',
-//             'message' => $error->getMessage()
-//         ]);
-//     }
-// })->middleware('auth:sanctum');
 
 Route::any('{any}', function () {
     return view('error.404');

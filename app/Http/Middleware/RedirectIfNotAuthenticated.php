@@ -19,7 +19,7 @@ class RedirectIfNotAuthenticated
         if (Auth::guard('sanctum')->check()) {
             return $next($request);
         } else {
-            toastr()->error('Please fill nickname and password first!', 'Authentication', ['timeOut' => 3000]);
+            toastr()->error('Please login first!', 'Authentication', ['timeOut' => 3000]);
             return redirect('/login');
         }
     }
