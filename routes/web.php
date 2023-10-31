@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
     Route::get('/dashboard', '')->name('dashboard');
-    // Route::get('/logout', 'logout')->name('logout');
+    Route::get('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
     // Route::post('/register', 'register')->name('register');
 });
 

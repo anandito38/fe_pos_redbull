@@ -4,6 +4,7 @@ namespace App\Repositories\Auth;
 
 use Exception;
 use App\DTO\UserDTO;
+use Carbon\Carbon;
 
 use App\Models\User;
 
@@ -18,11 +19,7 @@ class LoginRepository {
         try {
             $user = User::where('nickname', $userDTO->nickname)->first();
 
-            if (!$user) {
-                throw new Exception('Invalid credentials');
-            }
-
-            if (!password_verify($userDTO->password, $user->password)) {
+            if (!$user || !password_verify($userDTO->getPassword(), $user->password)) {
                 throw new Exception('Invalid credentials');
             }
 
