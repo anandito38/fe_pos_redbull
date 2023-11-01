@@ -38,7 +38,7 @@ Route::group([], function(){
 Route::middleware('is_Auth')->group(function(){
     Route::get('/admin', [AdminController::class, 'getAllAdmin'])->name('admin');
     Route::post('/admin/add', [AdminController::class, 'addAdmin']);
-    Route::put('/admin/edit', [AdminController::class, 'updateAdmin']);
+    Route::put('/admin/edit', [AdminController::class, 'editAdmin']);
     Route::delete('/admin/delete', [AdminController::class, 'deleteAdmin']);
 });
 
@@ -77,5 +77,9 @@ Route::group([], function(){
 });
 
 Route::any('{any}', function () {
-    return view('error.404');
+    // return view('error.404');
+    return response()->json([
+        'status' => 'error',
+        'message' => 'Page not found',
+    ])->setStatusCode(404);
 })->where('any', '.*');

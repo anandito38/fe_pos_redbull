@@ -10,16 +10,14 @@ use App\Services\Admin\GetAllAdminService;
 use App\Services\Admin\AddAdminService;
 use App\Services\Admin\DeleteAdminService;
 use App\Services\Admin\EditAdminService;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     public function __construct(
         private GetAllAdminService $getAllAdminService,
-        // private AddAdminService $addAdminService,
-        // private DeleteAdminService $deleteAdminService,
-        // private EditAdminService $editAdminService
+        private AddAdminService $addAdminService,
+        private DeleteAdminService $deleteAdminService,
+        private EditAdminService $editAdminService
     ) {}
 
     /**
@@ -30,6 +28,7 @@ class AdminController extends Controller
     public function getAllAdmin(Request $request) {
         try {
             $resultData = $this->getAllAdminService->getAllAdmin($request);
+
             return view('user.admin')->with('adminInfo', $resultData);
 
         } catch (Exception $error) {
@@ -41,26 +40,37 @@ class AdminController extends Controller
     }
 
     public function addAdmin(Request $request){
-        try{
-
-        }catch(Exception $error){
-
+        try {
+            $resultData = $this->addAdminService->AddAdmin($request);
+            toastr()->success('Admin added successfully!', 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', 'success');
+        } catch (Exception $error) {
+            toastr()->error($error->getMessage(), 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', $error->getMessage());
         }
     }
 
     public function deleteAdmin(Request $request){
-        try{
+        try {
+            $resultData = $this->deleteAdminService->deleteAdmin($request);
 
-        }catch(Exception $error){
-
+            toastr()->warning('Admin deleted successfully!', 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', 'success');
+        } catch (Exception $error) {
+            toastr()->error($error->getMessage(), 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', $error->getMessage());
         }
     }
 
     public function editAdmin(Request $request){
-        try{
+        try {
+            $resultData = $this->editAdminService->editAdmin($request);
 
-        }catch(Exception $error){
-
+            toastr()->info('Admin updated successfully!', 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', 'success');
+        } catch (Exception $error) {
+            toastr()->error($error->getMessage(), 'Admin', ['timeOut' => 3000]);
+            return redirect('/admin')->with('status', $error->getMessage());
         }
     }
 }

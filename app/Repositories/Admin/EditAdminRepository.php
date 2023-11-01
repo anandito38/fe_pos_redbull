@@ -3,28 +3,28 @@
 namespace App\Repositories\Admin;
 
 use Exception;
-use App\DTO\UserDTO;
 
+use App\DTO\UserDTO;
 use App\Models\User;
 
-class AddAdminRepository {
+class EditAdminRepository {
     /**
-     * Register new admin
-     * @param UserDTO $userDTO
+     * Edit admin
+     * @param UserDTO $UserDTO
      * @return UserDTO
      */
-    public function AddAdmin(UserDTO $userDTO) {
+    public function editAdmin(UserDTO $userDTO) {
         try {
-            $user = new User();
-            $user->nickname = $userDTO->nickname;
-            $user->password = $userDTO->password;
+            $user = User::find($userDTO->id);
             $user->fullName = $userDTO->fullName;
             $user->phoneNumber = $userDTO->phoneNumber;
-            $user->role = $userDTO->role;
             $user->address = $userDTO->address;
+            if($userDTO->role != null) {
+                $user->role = $userDTO->role;
+            }
             $user->save();
 
-            return $userDTO;
+            return $user;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
