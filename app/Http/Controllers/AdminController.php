@@ -39,4 +39,28 @@ class AdminController extends Controller
             ])->setStatusCode(404);
         }
     }
+
+    public function addAdmin(Request $request){
+        try{
+
+        }catch(Exception $error){
+
+        }
+    }
+
+    public function deleteAdmin(Request $request){
+        try{
+
+        }catch(Exception $error){
+
+        }
+    }
+
+    public function editAdmin(Request $request){
+        try{
+
+        }catch(Exception $error){
+
+        }
+    }
 }
