@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,10 +43,17 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/admin/delete', [AdminController::class, 'deleteAdmin']);
 });
 
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/customer', [CustomerController::class, 'getAllCustomer'])->name('customer');
+    Route::post('/customer/add', [CustomerController::class, 'addCustomer']);
+    Route::put('/customer/edit', [CustomerController::class, 'editCustomer']);
+    Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer']);
+});
+
 Route::group([], function(){
-    Route::get('/customer', function () {
-        return view('user.customer');
-    });
+    // Route::get('/customer', function () {
+    //     return view('user.customer');
+    // });
 
     // Route::get('/admin', function () {
     //     return view('user.admin');
