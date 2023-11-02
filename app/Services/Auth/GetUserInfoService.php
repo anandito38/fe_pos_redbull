@@ -18,24 +18,18 @@ class GetUserInfoService {
      */
     public function getUserInfo(Request $request) {
         try {
-            $user_id = $request->user()->id;
-            $user_email = $request->user()->email;
-            $user_role = $request->user()->role;
-            $user_name = $request->user()->name;
+            $user = $request->user();
 
-            $userDTO = new UserDTO(
-                $user_id,
-                $user_email,
-                null,
-                $user_name,
-                null,
-                null,
-                $user_role,
-                null,
-                null
+            if (!$user) {
+                throw new Exception('User not authenticated');
+            }
+
+            return new UserDTO(
+                id: $user->id,
+                nickname: $user->nickname,
+                fullName: $user->fullName,
+                role: $user->role
             );
-
-            return $userDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

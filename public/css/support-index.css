@@ -17,3 +17,7 @@
 .wrapper {
     background-image: url(../img/login_bg3.jpg);
 }
+
+.bold{
+    font-weight: bold;
+}
