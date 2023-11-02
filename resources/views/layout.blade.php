@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="utf-8">
@@ -23,7 +24,6 @@
 </head>
 
 <body id="page-top">
-
     <div id="wrapper">
 
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -70,8 +70,7 @@
                     <i class="fas fa-fw fa-boxes-stacked"></i>
                     <span>STOCK MODULE</span>
                 </a>
-                <div id="collapseStock" class="collapse" aria-labelledby="headingStock"
-                    data-parent="#accordionSidebar">
+                <div id="collapseStock" class="collapse" aria-labelledby="headingStock" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/category">
                             <i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i>CATEGORY SHEET
@@ -92,8 +91,7 @@
                     <i class="fas fa-fw fa-cash-register"></i>
                     <span>SALES MODULE</span>
                 </a>
-                <div id="collapseSales" class="collapse" aria-labelledby="headingSales"
-                    data-parent="#accordionSidebar">
+                <div id="collapseSales" class="collapse" aria-labelledby="headingSales" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/booking">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
@@ -128,23 +126,23 @@
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="float-left black-text">
                         @if (url('/dashboard') == url()->current())
-                            <h5>DASHBOARD</h5>
+                        <h5>DASHBOARD</h5>
                         @elseif (url('/admin') == url()->current())
-                            <h5>ADMIN SHEET INFORMATION</h5>
+                        <h5>ADMIN SHEET INFORMATION</h5>
                         @elseif (url('/customer') == url()->current())
-                            <h5>CUSTOMER SHEET INFORMATION</h5>
+                        <h5>CUSTOMER SHEET INFORMATION</h5>
                         @elseif (url('/vendors') == url()->current())
-                            <h5>VENDOR SHEET INFORMATION</h5>
+                        <h5>VENDOR SHEET INFORMATION</h5>
                         @elseif (url('/product') == url()->current())
-                            <h5>PRODUCT SHEET INFORMATION</h5>
+                        <h5>PRODUCT SHEET INFORMATION</h5>
                         @elseif (url('/booking') == url()->current())
-                            <h5>BOOKING SHEET INFORMATION</h5>
+                        <h5>BOOKING SHEET INFORMATION</h5>
                         @elseif (url('/invoice') == url()->current())
-                            <h5>INVOICE SHEET INFORMATION</h5>
+                        <h5>INVOICE SHEET INFORMATION</h5>
                         @elseif (url('/monitoring') == url()->current())
-                            <h5>MONITORING</h5>
+                        <h5>MONITORING</h5>
                         @elseif (url('/category') == url()->current())
-                            <h5>CATEGORY SHEET INFORMATION</h5>
+                        <h5>CATEGORY SHEET INFORMATION</h5>
                         @endif
                     </div>
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -152,36 +150,41 @@
                     </button>
 
                     <ul class="navbar-nav ml-auto">
+                        @if(Session::has('userInfo'))
+                            @php
+                                $data1 = Session::get('userInfo');
+                            @endphp
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">ANANDITO</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    <span class="mr-2 d-none d-lg-inline black-text small">
+                                        {{ $data1->getNickname() }}
+                                    </span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Log out
-                                </a>
-                            </div>
-                        </li>
-
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Log out
+                                    </a>
+                                </div>
+                            </li>
+                        @endif
                     </ul>
 
                 </nav>

@@ -6,7 +6,7 @@
 
 ## Deskripsi
 
-Repositori ini digunakan untuk menyimpan frontend proyek sistem informasi manajamen UMKM Kang Bakery, serta memenuhi tugas proyek RPL.
+Repositori ini digunakan untuk menyimpan proyek sistem informasi manajamen UMKM Kang Bakery, serta memenuhi tugas proyek RPL.
 
 
 ## Authors

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\DTO\UserDTO;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 use App\Repositories\Auth\LoginRepository;
 
@@ -37,13 +38,20 @@ class LoginService {
             // Get user from database
             $validUserDTO = $this->loginRepository->login($userDTO);
 
-            return ([
-                'fullName' => $validUserDTO->getFullName(),
-                'nickname' => $validUserDTO->getNickname(),
-                'role' => $validUserDTO->getRole(),
-                'token' => $validUserDTO->getToken(),
-                'status' => 'success'
-            ]);
+            if (Auth::attempt(['nickname' => $userDTO->getNickname(), 'password' => $userDTO->getPassword()])) {
+                return [
+                    'fullName' => $validUserDTO->getFullName(),
+                    'nickname' => $validUserDTO->getNickname(),
+                    'role' => $validUserDTO->getRole(),
+                    'token' => $validUserDTO->getToken(),
+                    'status' => 'success'
+                ];
+            } else {
+                return [
+                    'status' => 'failed',
+                    'message' => 'Invalid credentials',
+                ];
+            }
 
         } catch (Exception $error) {
             return ([
