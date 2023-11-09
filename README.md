@@ -29,9 +29,8 @@ Repositori ini digunakan untuk menyimpan proyek sistem informasi manajamen UMKM 
 2. Lakukan instalasi modul sebagai berikut.
 
 ```bash
-  composer install
   composer update
-  php artisan key:generate
+  composer install
 ```
 
 3. Lakukan konfigurasi dengan mengubah file `.env.example` menjadi `.env` dan sesuaikan konfigurasi database.
@@ -45,18 +44,18 @@ Repositori ini digunakan untuk menyimpan proyek sistem informasi manajamen UMKM 
   DB_PASSWORD= {PASSWORD_DATABASE}
   ...
 ```
+4. Lakukan instalasi modul selanjutnya sebagai berikut.
 
-4. Jalankan server backend yang sudah di konfigurasi.
+```bash
+  php artisan key:generate
+```
+
+5. Jalankan server yang sudah di konfigurasi.
 ```bash
   php artisan serve --port=8000
 ```
 
-5. Jalankan server frontend yang sudah di konfigurasi.
-```bash
-  php artisan serve --port=8001
-```
-
-6. Buka aplikasi di browser dengan alamat `http://localhost:8001`.
+6. Buka aplikasi di browser dengan alamat `http://localhost:8000`.
 
 
 ## Features
