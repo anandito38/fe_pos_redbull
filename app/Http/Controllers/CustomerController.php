@@ -15,9 +15,9 @@ class CustomerController extends Controller
 {
     public function __construct(
         private GetAllCustomerService $getAllCustomerService,
-        // private AddCustomerService $addCustomerService,
-        // private DeleteCustomerService $deleteCustomerService,
-        // private EditCustomerService $editCustomerService
+        private AddCustomerService $addCustomerService,
+        private DeleteCustomerService $deleteCustomerService,
+        private EditCustomerService $editCustomerService
     ) {}
 
     /**
@@ -41,7 +41,7 @@ class CustomerController extends Controller
 
     public function addCustomer(Request $request){
         try {
-            // $resultData = $this->addCustomerService->AddCustomer($request);
+            $resultData = $this->addCustomerService->AddCustomer($request);
             toastr()->success('Customer added successfully!', 'Customer', ['timeOut' => 3000]);
             return redirect('/customer')->with('status', 'success');
         } catch (Exception $error) {
@@ -52,7 +52,7 @@ class CustomerController extends Controller
 
     public function deleteCustomer(Request $request){
         try {
-            // $resultData = $this->deleteCustomerService->deleteCustomer($request);
+            $resultData = $this->deleteCustomerService->deleteCustomer($request);
 
             toastr()->warning('Customer deleted successfully!', 'Customer', ['timeOut' => 3000]);
             return redirect('/customer')->with('status', 'success');
@@ -64,7 +64,7 @@ class CustomerController extends Controller
 
     public function editCustomer(Request $request){
         try {
-            // $resultData = $this->editCustomerService->editCustomer($request);
+            $resultData = $this->editCustomerService->editCustomer($request);
 
             toastr()->info('Customer updated successfully!', 'Customer', ['timeOut' => 3000]);
             return redirect('/customer')->with('status', 'success');

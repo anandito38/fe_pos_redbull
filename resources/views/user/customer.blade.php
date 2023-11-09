@@ -76,7 +76,7 @@
 
                                                     <div class="mb-3 black-text bold">
                                                         <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="">
+                                                            class="form-control" value="{{$customer->id}}">
 
                                                         <label for="InputWarna" class="form-label">Full Name</label>
                                                         <input type="text" id="id" name="fullName"
