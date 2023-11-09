@@ -2,7 +2,6 @@
 
 namespace App\Services\Customer;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 use App\DTO\CustomerDTO;

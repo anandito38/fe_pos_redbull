@@ -15,9 +15,9 @@ class CategoryController extends Controller
 {
     public function __construct(
         private GetAllCategoryService $getAllCategoryService,
-        // private AddCategoryService $addCategoryService,
-        // private DeleteCategoryService $deleteCategoryService,
-        // private EditCategoryService $editCategoryService
+        private AddCategoryService $addCategoryService,
+        private DeleteCategoryService $deleteCategoryService,
+        private EditCategoryService $editCategoryService
     ) {}
 
     public function getAllCategory(Request $request) {
@@ -36,7 +36,8 @@ class CategoryController extends Controller
 
     public function addCategory(Request $request){
         try {
-            // $resultData = $this->addCategoryService->AddCategory($request);
+            $resultData = $this->addCategoryService->AddCategory($request);
+
             toastr()->success('Category added successfully!', 'Category', ['timeOut' => 3000]);
             return redirect('/category')->with('status', 'success');
         } catch (Exception $error) {
@@ -47,7 +48,7 @@ class CategoryController extends Controller
 
     public function deleteCategory(Request $request){
         try {
-            // $resultData = $this->deleteCategoryService->deleteCategory($request);
+            $resultData = $this->deleteCategoryService->deleteCategory($request);
 
             toastr()->warning('Category deleted successfully!', 'Category', ['timeOut' => 3000]);
             return redirect('/category')->with('status', 'success');
@@ -59,7 +60,7 @@ class CategoryController extends Controller
 
     public function editCategory(Request $request){
         try {
-            // $resultData = $this->editCategoryService->editCategory($request);
+            $resultData = $this->editCategoryService->editCategory($request);
 
             toastr()->info('Category updated successfully!', 'Category', ['timeOut' => 3000]);
             return redirect('/category')->with('status', 'success');
