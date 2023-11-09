@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (isset($vendorInfo))
+                        @if (isset($vendorInfo) && isset($categoryInfo))
                         @php
                             $iterator = 1;
                         @endphp
@@ -50,7 +50,7 @@
                             <td>{{$vendor['namaBarang']}}</td>
                             <td>{{$vendor['merek']}}</td>
                             <td>{{$vendor['quantity']}}</td>
-                            <td>Rp. {{number_format($vendor['hargaModal'], 0, ',', '.')}}</td>
+                            <td>Rp{{ number_format($vendor['hargaModal'], 0, ',', '.') }}</td>
                             <td>{{$vendor['category_name']}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
@@ -77,11 +77,37 @@
                                                     @method("PUT")
 
                                                     <div class="mb-3 black-text bold">
-                                                        <input type="hidden" id="id" name="color_id"
-                                                            class="form-control" value="">
-                                                        <label for="InputWarna" class="form-label">Nama</label>
-                                                        <input type="text" id="id" name="color_name"
-                                                            class="form-control" value="">
+                                                        <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{$vendor['id']}}">
+
+                                                            <div class="mb-3 black-text bold">
+                                                                <label for="InputWarna" class="form-label">Material Name</label>
+                                                                <input type="text" id="id" name="namaBarang" class="form-control" value="{{$vendor['namaBarang']}}">
+                                                            </div>
+
+                                                            <div class="mb-3 black-text bold">
+                                                                <label for="InputWarna" class="form-label ">Brand</label>
+                                                                <input type="text" id="id" name="merek" class="form-control" value="{{$vendor['merek']}}">
+                                                            </div>
+
+                                                            <div class="mb-3 black-text bold">
+                                                                <label for="InputWarna" class="form-label ">Quantity</label>
+                                                                <input type="number" id="id" name="quantity" class="form-control" value="{{$vendor['quantity']}}">
+                                                            </div>
+
+                                                            <div class="mb-3 black-text bold">
+                                                                <label for="InputWarna" class="form-label mt-1">Capital Price</label>
+                                                                <input type="number" id="id" name="hargaModal" class="form-control" value="{{$vendor['hargaModal']}}">
+                                                            </div>
+
+                                                            <label for="InputWarna" class="form-label mt-1 black-text bold">Category Name</label>
+                                                                <select type="text" class="form-select form-control black-text" id=""
+                                                                    name="category_id">
+                                                                    <option value="{{$vendor['category_id']}}" name="category_id" disabled selected hidden>{{$vendor['category_name']}}</option>
+                                                                    @foreach ($categoryInfo as $category)
+                                                                    <option value="{{$category->getId()}}" name="category_id"> {{$category->getNamaCategory()}}</option>
+                                                                    @endforeach
+                                                                </select>
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -154,7 +180,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Vendor</h5>
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Vendor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -164,11 +190,36 @@
                     @csrf
                     @method("POST")
 
-                    <div class="mb-3 black-text">
-                        <label for="InputWarna" class="form-label">Nama</label>
-                        <input type="text" id="color_name" name="color_name" class="form-control">
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Material Name</label>
+                        <input type="text" id="id" name="namaBarang" class="form-control" placeholder="-- Enter Material Name --">
                     </div>
 
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label mt-1">Brand</label>
+                        <input type="text" id="id" name="merek" class="form-control" placeholder="-- Enter Brand --">
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label mt-1">Quantity</label>
+                        <input type="number" id="id" name="quantity" class="form-control" placeholder="-- Enter Quantity --">
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label mt-2">Capital Price</label>
+                        <input type="number" id="id" name="hargaModal" class="form-control" placeholder="-- Enter Capital Price --">
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                    <label for="InputWarna" class="form-label mt-2">Category Name</label>
+                        <select type="text" class="form-select form-control black-text" id=""
+                            name="category_id">
+                            <option value="" disabled selected hidden>Choose...</option>
+                            @foreach ($categoryInfo as $category)
+                            <option value="{{$category->getId()}}" name="category_id"> {{$category->getNamaCategory()}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>
             </div>
