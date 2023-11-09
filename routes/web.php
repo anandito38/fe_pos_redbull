@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,14 +51,14 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer']);
 });
 
-Route::group([], function(){
-    // Route::get('/customer', function () {
-    //     return view('user.customer');
-    // });
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/category', [CategoryController::class, 'getAllCategory'])->name('category');
+    Route::post('/category/add', [CategoryController::class, 'addCategory']);
+    Route::put('/category/edit', [CategoryController::class, 'editCategory']);
+    Route::delete('/category/delete', [CategoryController::class, 'deleteCategory']);
+});
 
-    // Route::get('/admin', function () {
-    //     return view('user.admin');
-    // });
+Route::group([], function(){
 
     Route::get('/vendors', function () {
         return view('stock.vendors');
@@ -65,10 +66,6 @@ Route::group([], function(){
 
     Route::get('/product', function () {
         return view('stock.product');
-    });
-
-    Route::get('/category', function () {
-        return view('stock.category');
     });
 
     Route::get('/404', function () {
