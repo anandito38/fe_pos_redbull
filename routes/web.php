@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
-    Route::post('/register', 'register')->name('register');
+    // Route::post('/register', 'register')->name('register');
     Route::get('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
 });
 
@@ -58,10 +59,14 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/category/delete', [CategoryController::class, 'deleteCategory']);
 });
 
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/vendors', [VendorController::class, 'getAllVendorWithCategory'])->name('vendors');
+    Route::post('/vendors/add', [VendorController::class, 'addVendor']);
+    Route::put('/vendors/edit', [VendorController::class, 'editVendor']);
+    Route::delete('/vendors/delete', [VendorController::class, 'deleteVendor']);
+});
+
 Route::group([], function(){
-    Route::get('/vendors', function () {
-        return view('stock.vendors');
-    });
 
     Route::get('/product', function () {
         return view('stock.product');
