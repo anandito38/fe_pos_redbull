@@ -59,7 +59,6 @@ Route::middleware('is_Auth')->group(function(){
 });
 
 Route::group([], function(){
-
     Route::get('/vendors', function () {
         return view('stock.vendors');
     });
