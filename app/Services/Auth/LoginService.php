@@ -54,7 +54,10 @@ class LoginService {
             }
 
         } catch (Exception $error) {
-            throw new Exception($error->getMessage());
+            return ([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ]);
         }
     }
 }

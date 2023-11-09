@@ -86,8 +86,7 @@
                                                             class="form-control black-text"
                                                             value="{{$admin->getfullName()}}">
 
-                                                        <label for="InputWarna" class="form-label mt-3">Phone
-                                                            Number</label>
+                                                        <label for="InputWarna" class="form-label mt-3">Phone Number</label>
                                                         <input type="text" id="id" name="phoneNumber"
                                                             class="form-control black-text"
                                                             value="{{$admin->getPhoneNumber()}}">
@@ -133,7 +132,7 @@
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Delete Data</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -177,7 +176,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Admin</h5>
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Admin</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -187,7 +186,7 @@
                     @csrf
                     @method("POST")
 
-                    <div class="mb-3 black-text">
+                    <div class="mb-3 black-text bold">
                         <label for="InputWarna" class="form-label">Full Name</label>
                         <input type="text" id="id" name="fullName" class="form-control black-text"
                             placeholder="-- Enter Fullname --">

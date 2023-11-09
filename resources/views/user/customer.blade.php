@@ -33,48 +33,70 @@
                             <th>Full Name</th>
                             <th>Nickname</th>
                             <th>Phone Number</th>
-                            <th>Adress</th>
+                            <th>Address</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if (isset($customerInfo))
+                        @php
+                        $iterator = 1;
+                        @endphp
+                        @foreach ($customerInfo as $customer)
                         <tr>
-                            <td>1</td>
-                            <td>ANANDITO SATRIA ASYRAF</td>
-                            <td>ANANDITO</td>
-                            <td>0822xxxx9554</td>
-                            <td>Sukabirus F10</td>
+                            <td>{{$iterator}}</td>
+                            <td>{{$customer->getFullName()}}</td>
+                            <td>{{$customer->getNickname()}}</td>
+                            <td>{{$customer->getPhoneNumber()}}</td>
+                            <td>{{$customer->getAddress()}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$customer->id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal Update Data -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$customer->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Customer</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Customer</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/customer/edit">
                                                     @csrf
                                                     @method("PUT")
 
-                                                    <div class="mb-3">
-                                                        <input type="hidden" id="id" name="color_id"
-                                                            class="form-control" value="">
-                                                        <label for="InputWarna" class="form-label">Nama</label>
-                                                        <input type="text" id="id" name="color_name"
-                                                            class="form-control" value="">
+                                                    <div class="mb-3 black-text bold">
+                                                        <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{$customer->id}}">
+
+                                                        <label for="InputWarna" class="form-label">Full Name</label>
+                                                        <input type="text" id="id" name="fullName"
+                                                            class="form-control black-text"
+                                                            value="{{$customer->getfullName()}}">
+
+                                                        <label for="InputWarna" class="form-label mt-3">Nickname</label>
+                                                        <input type="text" id="id" name="nickname"
+                                                            class="form-control black-text"
+                                                            value="{{$customer->getNickname()}}">
+
+                                                        <label for="InputWarna" class="form-label mt-3">Phone Number</label>
+                                                        <input type="text" id="id" name="phoneNumber"
+                                                            class="form-control black-text"
+                                                            value="{{$customer->getPhoneNumber()}}">
+
+                                                        <label for="InputWarna" class="form-label mt-3">Address</label>
+                                                        <input type="text" id="id" name="address"
+                                                            class="form-control black-text"
+                                                            value="{{$customer->getAddress()}}">
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -93,17 +115,17 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$customer->id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal delete -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$customer->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Delete Data</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -115,11 +137,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/customer/delete">
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" id="id" name="id" class="form-control"
-                                                        value="">
+                                                        value="{{$customer->id}}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
@@ -128,6 +150,11 @@
                                 </div>
                             </td>
                         </tr>
+                        @php
+                        $iterator++;
+                        @endphp
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -142,19 +169,32 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Customer</h5>
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Customer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="/customer/add">
                     @csrf
                     @method("POST")
 
-                    <div class="mb-3 black-text">
-                        <label for="InputWarna" class="form-label">Nama</label>
-                        <input type="text" id="color_name" name="color_name" class="form-control">
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Full Name</label>
+                        <input type="text" id="id" name="fullName" class="form-control black-text"
+                            placeholder="-- Enter Fullname --">
+
+                        <label for="InputWarna" class="form-label mt-3">Nickname</label>
+                        <input type="text" id="id" name="nickname" class="form-control black-text"
+                            placeholder="-- Enter Nickname --">
+
+                        <label for="InputWarna" class="form-label mt-3">Phone Number</label>
+                        <input type="text" id="id" name="phoneNumber" class="form-control black-text"
+                            placeholder="-- Enter PhoneNumber --">
+
+                        <label for="InputWarna" class="form-label mt-3">Address</label>
+                        <input type="text" id="id" name="address" class="form-control black-text"
+                            placeholder="-- Enter Address --">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

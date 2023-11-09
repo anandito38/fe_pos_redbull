@@ -30,45 +30,50 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Category</th>
+                            <th>Category Name</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if(isset($categoryInfo))
+                        @php
+                            $iterator = 1;
+                        @endphp
+                        @foreach ($categoryInfo as $category)
                         <tr>
-                            <td>1</td>
-                            <td>Flavor</td>
+                            <td>{{$iterator}}</td>
+                            <td>{{$category->getNamaCategory()}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$category->id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal Update Data -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$category->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Category</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Category</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/category/edit">
                                                     @csrf
                                                     @method("PUT")
 
-                                                    <div class="mb-3">
-                                                        <input type="hidden" id="id" name="color_id"
-                                                            class="form-control" value="">
-                                                        <label for="InputWarna" class="form-label">Nama</label>
-                                                        <input type="text" id="id" name="color_name"
-                                                            class="form-control" value="">
+                                                    <div class="mb-3 black-text bold">
+                                                        <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{$category->id}}">
+                                                        <label for="InputWarna" class="form-label">Category Name</label>
+                                                        <input type="text" id="id" name="namaCategory"
+                                                            class="form-control" value="{{$category->getNamaCategory()}}">
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -87,17 +92,17 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$category->id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal delete -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$category->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Delete Data</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -109,11 +114,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/category/delete">
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" id="id" name="id" class="form-control"
-                                                        value="">
+                                                        value="{{$category->id}}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
@@ -122,6 +127,11 @@
                                 </div>
                             </td>
                         </tr>
+                        @php
+                            $iterator++;
+                        @endphp
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -136,19 +146,20 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Category</h5>
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="/category/add">
                     @csrf
                     @method("POST")
 
-                    <div class="mb-3 black-text">
-                        <label for="InputWarna" class="form-label">Nama</label>
-                        <input type="text" id="color_name" name="color_name" class="form-control">
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Category Name</label>
+                        <input type="text" id="id" name="namaCategory" class="form-control black-text"
+                        placeholder="-- Enter Category Name --">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>
