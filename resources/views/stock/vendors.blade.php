@@ -34,44 +34,49 @@
                             <th>Brand</th>
                             <th>Quantity</th>
                             <th>Capital Price</th>
-                            <th>Price per Item</th>
+                            <th>Category Name</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if (isset($vendorInfo))
+                        @php
+                            $iterator = 1;
+                        @endphp
+                        @foreach ($vendorInfo as $vendor)
                         <tr>
-                            <td>1</td>
-                            <td>Iphone 13</td>
-                            <td>Apple</td>
-                            <td>2</td>
-                            <td>Rp. 10,000,000</td>
-                            <td>Rp. 5,000,000</td>
+                            <td>{{$iterator}}</td>
+                            <td>{{$vendor['namaBarang']}}</td>
+                            <td>{{$vendor['merek']}}</td>
+                            <td>{{$vendor['quantity']}}</td>
+                            <td>Rp. {{number_format($vendor['hargaModal'], 0, ',', '.')}}</td>
+                            <td>{{$vendor['category_name']}}</td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$vendor['id']}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal Update Data -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$vendor['id']}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Vendor</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Vendor</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/vendors/edit">
                                                     @csrf
                                                     @method("PUT")
 
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 black-text bold">
                                                         <input type="hidden" id="id" name="color_id"
                                                             class="form-control" value="">
                                                         <label for="InputWarna" class="form-label">Nama</label>
@@ -95,17 +100,17 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$vendor['id']}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal delete -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$vendor['id']}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Delete Data</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -117,11 +122,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/vendors/delete">
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" id="id" name="id" class="form-control"
-                                                        value="">
+                                                        value="{{$vendor['id']}}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
@@ -130,6 +135,11 @@
                                 </div>
                             </td>
                         </tr>
+                        @php
+                            $iterator++;
+                        @endphp
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -150,7 +160,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="/vendors/add">
                     @csrf
                     @method("POST")
 

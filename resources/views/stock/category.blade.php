@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Category</th>
+                            <th>Category Name</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -71,7 +71,7 @@
                                                     <div class="mb-3 black-text bold">
                                                         <input type="hidden" id="id" name="id"
                                                             class="form-control" value="{{$category->id}}">
-                                                        <label for="InputWarna" class="form-label">Nama Category</label>
+                                                        <label for="InputWarna" class="form-label">Category Name</label>
                                                         <input type="text" id="id" name="namaCategory"
                                                             class="form-control" value="{{$category->getNamaCategory()}}">
                                                     </div>
@@ -157,7 +157,7 @@
                     @method("POST")
 
                     <div class="mb-3 black-text bold">
-                        <label for="InputWarna" class="form-label">Nama Category</label>
+                        <label for="InputWarna" class="form-label">Category Name</label>
                         <input type="text" id="id" name="namaCategory" class="form-control black-text"
                         placeholder="-- Enter Category Name --">
                     </div>
