@@ -6,7 +6,7 @@
 
 ## Deskripsi
 
-Repositori ini digunakan untuk menyimpan frontend proyek sistem informasi manajamen UMKM Kang Bakery, serta memenuhi tugas proyek RPL.
+Repositori ini digunakan untuk menyimpan proyek sistem informasi manajamen UMKM Kang Bakery, serta memenuhi tugas proyek RPL.
 
 
 ## Authors
@@ -15,7 +15,7 @@ Repositori ini digunakan untuk menyimpan frontend proyek sistem informasi manaja
 - [@nabilaurelliaa](https://github.com/nabilaurelliaa) - Nabila Aurellia / 1301213017
 - [@nadirhadd](https://github.com/nadirhadd) - Nadir Septian / 1301213098
 - [@Ryvenzz](https://github.com/Ryvenzz) - Atilla Fejril / 1301210495
-- [@viegoz](https://github.com/viegoz) - Viego Naufal Salsabil / 130121
+- [@viegoz](https://github.com/viegoz) - Viego Naufal Salsabil / 1301213418
 
 
 ## Instalasi
