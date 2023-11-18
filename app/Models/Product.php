@@ -14,9 +14,6 @@ class Product extends Model
         'kode',
         'hargaJual',
         'quantity',
-
-        'booking_id',
-        // 'vendor_id'
     ];
 
     protected $primaryKey = 'id';
