@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('hargaJual')->nullable();
             $table->integer('quantity')->nullable();
 
-            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

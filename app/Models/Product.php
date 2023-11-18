@@ -16,14 +16,22 @@ class Product extends Model
         'quantity',
 
         'booking_id',
-        'vendor_id'
+        // 'vendor_id'
     ];
+
+    protected $primaryKey = 'id';
 
     public function bookings(){
         return $this->belongsTo(Booking::class);
     }
 
-    public function vendors(){
-        return $this->belongsTo(Vendor::class);
+    public function vendors()
+    {
+        return $this->belongsToMany(Vendor::class, 'MEMPRODUKSI', 'idProduct', 'idVendor');
+    }
+
+    public function bookedBy()
+    {
+        return $this->belongsToMany(Booking::class, 'MEMILIH', 'idProduct', 'idBook');
     }
 }

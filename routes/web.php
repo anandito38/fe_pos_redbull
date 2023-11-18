@@ -66,6 +66,8 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/vendors/delete', [VendorController::class, 'deleteVendor']);
 });
 
+
+
 Route::group([], function(){
 
     Route::get('/product', function () {
