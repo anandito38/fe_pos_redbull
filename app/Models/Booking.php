@@ -18,6 +18,8 @@ class Booking extends Model
         'payment_id'
     ];
 
+    protected $primaryKey = 'id';
+
     public function customers(){
         return $this->belongsTo(Customer::class);
     }
@@ -26,7 +28,8 @@ class Booking extends Model
         return $this->belongsTo(Payment::class);
     }
 
-    public function products(){
-        return $this->hasMany(Product::class, 'booking_id', 'id');
+    public function selectedProducts()
+    {
+        return $this->belongsToMany(Product::class, 'MEMILIH', 'idBook', 'idProduct');
     }
 }

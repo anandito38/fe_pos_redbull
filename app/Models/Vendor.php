@@ -15,15 +15,18 @@ class Vendor extends Model
         'quantity',
         'hargaModal',
 
-        'category_id'
+        // 'category_id'
     ];
+
+    protected $primaryKey = 'id';
 
     public function categories(){
         return $this->belongsTo(Category::class);
     }
 
-    public function products(){
-        return $this->hasMany(Product::class, 'vendor_id', 'id');
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'MEMPRODUKSI', 'idVendor', 'idProduct');
     }
 
 }
