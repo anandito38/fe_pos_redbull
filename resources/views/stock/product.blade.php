@@ -32,6 +32,7 @@
                             <th>No</th>
                             <th>Product Code</th>
                             <th>Product Name</th>
+                            <th>Product Stock</th>
                             <th>Capital Price</th>
                             <th>Selling Price</th>
                             <th>Detail</th>
@@ -40,12 +41,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (isset($productInfo))
+                        @php
+                            $iterator = 1;
+                        @endphp
+                        @foreach ($productInfo as $product)
                         <tr>
-                            <td>1</td>
-                            <td>MCH-DFK-COCHO</td>
-                            <td>MOCHI DAIFUKU CHOCHOLATE</td>
-                            <td>Rp. 7,000</td>
-                            <td>Rp. 11,000</td>
+                            <td>{{$iterator}}</td>
+                            <td>{{$product->getKode()}}</td>
+                            <td>{{$product->getNama()}}</td>
+                            <td>{{$product->getQuantity()}}</td>
+                            <td>Rp{{ number_format(5000, 0, ',', '.') }}</td>
+                            <td>Rp{{ number_format($product->getHargaJual(), 0, ',', '.') }}</td>
                             <td>
                                 <button type="button" class="btn-sm btn-primary">
                                     <i class="fa fa-window-restore"></i>
@@ -54,33 +61,46 @@
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit">
+                                    data-target="#exampleModalCenterEdit{{$product->id}}">
                                     <i class="fa fa-edit"></i>
                                 </button>
 
                                 <!-- Modal Update Data -->
-                                <div class="modal fade" id="exampleModalCenterEdit" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$product->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Product</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Product</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/product/edit">
                                                     @csrf
                                                     @method("PUT")
 
-                                                    <div class="mb-3">
-                                                        <input type="hidden" id="id" name="color_id"
-                                                            class="form-control" value="">
-                                                        <label for="InputWarna" class="form-label">Nama</label>
-                                                        <input type="text" id="id" name="color_name"
-                                                            class="form-control" value="">
+                                                    <div class="mb-3 black-text bold">
+                                                        <input type="hidden" id="id" name="id"
+                                                            class="form-control" value="{{$product->getId()}}">
+
+                                                        <div class="mb-3 black-text bold">
+                                                            <label for="InputWarna" class="form-label">Product Name</label>
+                                                            <input type="text" id="nama" name="nama" class="form-control" value="{{$product->getNama()}}">
+                                                        </div>
+
+                                                        <div class="mb-3 black-text bold">
+                                                            <label for="InputWarna" class="form-label">Selling Price</label>
+                                                            <input type="number" id="hargaJual" name="hargaJual" class="form-control" value="{{$product->getHargaJual()}}">
+                                                        </div>
+
+                                                        <div class="mb-3 black-text bold">
+                                                            <label for="InputWarna" class="form-label">Quantity</label>
+                                                            <input type="number" id="quantity" name="quantity" class="form-control" value="{{$product->getQuantity()}}">
+                                                        </div>
+
                                                     </div>
 
                                                     <div class="mb-3 float-right">
@@ -99,17 +119,17 @@
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#exampleModalCenterDelete">
+                                    data-target="#exampleModalCenterDelete{{$product->id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
 
                                 <!-- Modal delete -->
-                                <div class="modal fade" id="exampleModalCenterDelete" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterDelete{{$product->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Data</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Delete Data</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -121,11 +141,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">No</button>
-                                                <form method="POST" action="">
+                                                <form method="POST" action="/product/delete">
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" id="id" name="id" class="form-control"
-                                                        value="">
+                                                        value="{{$product->id}}">
                                                     <button type="submit" class="btn btn-danger">Yes</button>
                                                 </form>
                                             </div>
@@ -134,6 +154,11 @@
                                 </div>
                             </td>
                         </tr>
+                        @php
+                            $iterator++;
+                        @endphp
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -148,19 +173,29 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLongTitle">New Data Product</h5>
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="/product/add">
                     @csrf
                     @method("POST")
 
-                    <div class="mb-3 black-text">
-                        <label for="InputWarna" class="form-label">Nama</label>
-                        <input type="text" id="color_name" name="color_name" class="form-control">
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Product Name</label>
+                        <input type="text" id="nama" name="nama" class="form-control" placeholder="-- Enter Product Name --">
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Selling Price</label>
+                        <input type="number" id="hargaJual" name="hargaJual" class="form-control" placeholder="-- Enter Selling Price --">
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Product Stock</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control" placeholder="-- Enter Product Stock --">
                     </div>
 
                     <button type="submit" class="btn btn-success float-right">Submit</button>

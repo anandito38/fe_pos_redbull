@@ -6,8 +6,8 @@ class ProductDTO{
         public ?int $id,
         public ?string $nama = null,
         public ?string $kode = null,
-        public ?string $hargaJual = null,
-        public ?string $quantity = null,
+        public ?int $hargaJual = null,
+        public ?int $quantity = null,
     ){}
 
     public function getId(): int
@@ -40,22 +40,22 @@ class ProductDTO{
         $this->kode = $kode;
     }
 
-    public function getHargaJual(): string
+    public function getHargaJual(): int
     {
-        return $this->hargaJual;
+        return $this->hargaJual ?? 0;
     }
 
-    public function setHargaJual(string $hargaJual): void
+    public function setHargaJual(int $hargaJual): void
     {
         $this->hargaJual = $hargaJual;
     }
 
-    public function getQuantity(): string
+    public function getQuantity(): int
     {
-        return $this->quantity;
+        return $this->quantity ?? 0;
     }
 
-    public function setQuantity(string $quantity): void
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
     }

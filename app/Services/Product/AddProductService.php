@@ -23,13 +23,15 @@ class AddProductService {
     public function addProduct(Request $request) {
         try {
             $request->validate([
-                'nama' => 'required',
+                'nama' => 'required|unique:products,nama',
                 'hargaJual' => 'required',
             ]);
 
             $productDTO = new ProductDTO(
                 id : null,
-                nama: $request->nama
+                nama: $request->nama,
+                hargaJual: $request->hargaJual,
+                quantity: $request->quantity,
             );
 
             $productResult = $this->addProductRepository->AddProduct($productDTO);

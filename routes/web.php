@@ -75,11 +75,6 @@ Route::middleware('is_Auth')->group(function(){
 });
 
 Route::group([], function(){
-
-    Route::get('/product', function () {
-        return view('stock.product');
-    });
-
     Route::get('/404', function () {
         return view('error.404');
     });
