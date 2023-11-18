@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'fullName' => 'Nadir Septian',
             'nickname' => 'Nadir',
             'password' => Hash::make('12345678'),
-            'phoneNumber' => '081334567870',
+            'phoneNumber' => '081334567810',
             'address' => 'Jl. Sukabirus F20',
             'role' => 'Administrator'
         ]);

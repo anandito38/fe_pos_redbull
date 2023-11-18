@@ -18,8 +18,8 @@ class ProductSeeder extends Seeder
             'kode' => 'P-001',
             'hargaJual' => '10000',
             'quantity' => '100',
-            'booking_id' => 1,
-            'vendor_id' => 1
+            // 'booking_id' => 1,
+            // 'vendor_id' => 1
         ]);
     }
 }
