@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,7 +67,12 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/vendors/delete', [VendorController::class, 'deleteVendor']);
 });
 
-
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/product', [ProductController::class, 'getAllProduct'])->name('product');
+    Route::post('/product/add', [ProductController::class, 'addProduct']);
+    Route::put('/product/edit', [ProductController::class, 'editProduct']);
+    Route::delete('/product/delete', [ProductController::class, 'deleteProduct']);
+});
 
 Route::group([], function(){
 

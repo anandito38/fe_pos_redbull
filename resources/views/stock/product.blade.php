@@ -34,6 +34,7 @@
                             <th>Product Name</th>
                             <th>Capital Price</th>
                             <th>Selling Price</th>
+                            <th>Detail</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -45,6 +46,11 @@
                             <td>MOCHI DAIFUKU CHOCHOLATE</td>
                             <td>Rp. 7,000</td>
                             <td>Rp. 11,000</td>
+                            <td>
+                                <button type="button" class="btn-sm btn-primary">
+                                    <i class="fa fa-window-restore"></i>
+                                </button>
+                            </td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
