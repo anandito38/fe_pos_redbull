@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
 
-use App\DTO\MemproduksiDTO;
 use App\Services\ProductDetail\GetAllProductDetailService;
 use App\Services\ProductDetail\AddProductDetailService;
 use App\Services\ProductDetail\DeleteProductDetailService;
@@ -17,19 +16,17 @@ class ProductDetailController extends Controller
     public function __construct(
         private GetAllProductDetailService $getAllProductDetailService,
         private AddProductDetailService $addProductDetailService,
-        private DeleteProductDetailService $deleteProductDetailService
+        private DeleteProductDetailService $deleteProductDetailService,
     ) {}
 
-    public function getAllProductDetail(Request $request) {
+    public function getAllProductDetail($productId) {
         try {
-            $idProduct = $request->input('idProduct');
-            $idVendor = $request->input('idVendor');
+            $resultData = $this->getAllProductDetailService->getAllProductDetail($productId);
 
-            $productDetailDTO = new MemproduksiDTO($idVendor, $idProduct);
+            $productData = $resultData['product'];
+            $vendorsData = $resultData['vendors'];
 
-            $resultData = $this->getAllProductDetailService->getAllProductDetail($productDetailDTO);
-
-            return view('stock.productdetail', ['productDetailInfo' => $resultData]);
+            return view('stock.productdetail', ['product' => $productData, 'vendors' => $vendorsData]);
 
         } catch (Exception $error) {
             return response()->json([
@@ -47,10 +44,10 @@ class ProductDetailController extends Controller
             $resultData = $this->addProductDetailService->addProductDetail($idProduct, $idVendor);
 
             toastr()->success('Material added successfully!', 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/productdetail')->with('status', 'success');
+            return redirect('/product/detail/'.$idProduct)->with('status', 'success');
         } catch (Exception $error) {
             toastr()->error($error->getMessage(), 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/productdetail')->with('status', $error->getMessage());
+            return redirect('/product/detail/'.$idProduct)->with('status', $error->getMessage());
         }
     }
 
@@ -63,10 +60,10 @@ class ProductDetailController extends Controller
 
 
             toastr()->warning('Material deleted successfully!', 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/productdetail')->with('status', 'success');
+            return redirect('/product/detail/'.$idProduct)->with('status', 'success');
         } catch (Exception $error) {
             toastr()->error($error->getMessage(), 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/productdetail')->with('status', $error->getMessage());
+            return redirect('/product/detail/'.$idProduct)->with('status', $error->getMessage());
         }
     }
 }

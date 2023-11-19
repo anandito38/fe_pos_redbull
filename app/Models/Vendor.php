@@ -26,7 +26,7 @@ class Vendor extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'MEMPRODUKSI', 'idVendor', 'idProduct');
+        return $this->belongsToMany(Product::class, 'memproduksis', 'idVendor', 'idProduct');
     }
 
 }

@@ -30,6 +30,6 @@ class Booking extends Model
 
     public function selectedProducts()
     {
-        return $this->belongsToMany(Product::class, 'MEMILIH', 'idBook', 'idProduct');
+        return $this->belongsToMany(Product::class, 'memilihs', 'idBook', 'idProduct');
     }
 }

@@ -76,9 +76,9 @@ Route::middleware('is_Auth')->group(function(){
 });
 
 Route::middleware('is_Auth')->group(function(){
-    Route::get('/productdetail', [ProductDetailController::class, 'getAllProductDetail'])->name('productdetail');
-    Route::post('/productdetail/add', [ProductDetailController::class, 'addProductDetail']);
-    Route::delete('/productdetail/delete', [ProductDetailController::class, 'deleteProductDetail']);
+    Route::get('/product/detail/{id}', [ProductDetailController::class, 'getAllProductDetail'])->name('productdetail');
+    Route::post('/product/detail/add', [ProductDetailController::class, 'addProductDetail']);
+    Route::delete('/product/detail/delete', [ProductDetailController::class, 'deleteProductDetail']);
 });
 
 Route::group([], function(){

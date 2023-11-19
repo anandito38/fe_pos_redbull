@@ -24,11 +24,11 @@ class Product extends Model
 
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class, 'MEMPRODUKSI', 'idProduct', 'idVendor');
+        return $this->belongsToMany(Vendor::class, 'memproduksis', 'idProduct', 'idVendor');
     }
 
     public function bookedBy()
     {
-        return $this->belongsToMany(Booking::class, 'MEMILIH', 'idProduct', 'idBook');
+        return $this->belongsToMany(Booking::class, 'memilihs', 'idProduct', 'idBook');
     }
 }
