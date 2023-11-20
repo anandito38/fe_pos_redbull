@@ -4,23 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMemilihTable extends Migration
+class CreateMemproduksisTable extends Migration
 {
     public function up()
     {
-        Schema::create('MEMILIH', function (Blueprint $table) {
-            $table->unsignedBigInteger('idBook');
+        Schema::create('memproduksis', function (Blueprint $table) {
+            $table->unsignedBigInteger('idVendor');
             $table->unsignedBigInteger('idProduct');
 
-            $table->foreign('idBook')->references('id')->on('bookings')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idVendor')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idProduct')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->primary(['idBook', 'idProduct']);
+            $table->primary(['idVendor', 'idProduct']);
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('MEMILIH');
+        Schema::dropIfExists('memproduksis');
     }
 }

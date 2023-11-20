@@ -54,9 +54,11 @@
                             <td>Rp{{ number_format(5000, 0, ',', '.') }}</td>
                             <td>Rp{{ number_format($product->getHargaJual(), 0, ',', '.') }}</td>
                             <td>
-                                <button type="button" class="btn-sm btn-primary">
-                                    <i class="fa fa-window-restore"></i>
-                                </button>
+                                <a href="/product/detail/{{$product->id}}">
+                                    <button type="button" class="btn-sm btn-primary">
+                                        <i class="fa fa-window-restore"></i>
+                                    </button>
+                                </a>
                             </td>
                             <td>
                                 <!-- Button trigger modal Edit -->

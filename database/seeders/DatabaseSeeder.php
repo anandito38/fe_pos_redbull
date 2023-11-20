@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             InvoiceSeeder::class,
             PaymentSeeder::class,
             BookingSeeder::class,
-            ProductSeeder::class
+            ProductSeeder::class,
+            MemproduksiSeeder::class,
         ]);
     }
 }
