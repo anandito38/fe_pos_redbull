@@ -17,11 +17,12 @@ class GetAllProductRepository
             $productDTOs = [];
             foreach ($products as $product) {
                 $productDTO = new ProductDTO(
-                    id: $product->id,
-                    nama: $product->nama,
-                    kode: $product->kode,
-                    hargaJual: $product->hargaJual,
-                    quantity: $product->quantity
+                    $product->id,
+                    $product->nama,
+                    $product->kode,
+                    $product->hargaJual,
+                    $product->quantity,
+                    $product->external_id
                 );
 
                 array_push($productDTOs, $productDTO);

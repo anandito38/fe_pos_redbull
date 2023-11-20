@@ -8,6 +8,7 @@ class ProductDTO{
         public ?string $kode = null,
         public ?int $hargaJual = null,
         public ?int $quantity = null,
+        public ?string $external_id = null
     ){}
 
     public function getId(): int
@@ -58,6 +59,16 @@ class ProductDTO{
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
+    }
+
+    public function getExternalId(): string
+    {
+        return $this->external_id;
+    }
+
+    public function setExternalId(string $external_id): void
+    {
+        $this->external_id = $external_id;
     }
 }
 ?>
