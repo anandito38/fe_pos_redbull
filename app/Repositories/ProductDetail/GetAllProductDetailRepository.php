@@ -25,7 +25,11 @@ class GetAllProductDetailRepository
 
             // Mengambil data Vendor berdasarkan ID Vendor dari tabel Memproduksi
             foreach ($memproduksiData as $data) {
-                $vendor = Vendor::find($data->idVendor);
+                $vendor = Vendor::with('categories')
+                    ->join('categories', 'vendors.category_id', '=', 'categories.id')
+                    ->select('vendors.*', 'categories.namaCategory')
+                    ->find($data->idVendor);
+
                 if ($vendor) {
                     $vendorData->push($vendor);
                 }

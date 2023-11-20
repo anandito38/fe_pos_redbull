@@ -12,6 +12,9 @@ class Memproduksi extends Model
     protected $table = 'memproduksis';
     public $timestamps = false;
 
+    protected $primaryKey = ['idProduct', 'idVendor'];
+    public $incrementing = false;
+
     protected $fillable = [
         'idProduct',
         'idVendor'

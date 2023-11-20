@@ -2,15 +2,15 @@
 
 namespace App\Repositories\ProductDetail;
 
+use App\Models\Memproduksi;
 use Exception;
-use App\Models\ProductDetail;
 
 class DeleteProductDetailRepository
 {
     public function DeleteProductDetail(int $idProduct, int $idVendor)
     {
         try {
-            $relation = ProductDetail::where('idProduct', $idProduct)
+            $relation = Memproduksi::where('idProduct', $idProduct)
                 ->where('idVendor', $idVendor)
                 ->first();
 
@@ -18,7 +18,9 @@ class DeleteProductDetailRepository
                 throw new Exception('Product-Vendor relation not found');
             }
 
-            $relation->delete();
+            Memproduksi::where('idProduct', $idProduct)
+                ->where('idVendor', $idVendor)
+                ->delete();
 
             return $relation;
         } catch (Exception $error) {

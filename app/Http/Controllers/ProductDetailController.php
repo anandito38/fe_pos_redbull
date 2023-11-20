@@ -9,6 +9,8 @@ use Exception;
 use App\Services\ProductDetail\GetAllProductDetailService;
 use App\Services\ProductDetail\AddProductDetailService;
 use App\Services\ProductDetail\DeleteProductDetailService;
+use App\Repositories\ProductDetail\GetExternalIdLinkRepository;
+use App\Services\Vendor\GetAllVendorWithCategoryService;
 
 class ProductDetailController extends Controller
 {
@@ -17,16 +19,21 @@ class ProductDetailController extends Controller
         private GetAllProductDetailService $getAllProductDetailService,
         private AddProductDetailService $addProductDetailService,
         private DeleteProductDetailService $deleteProductDetailService,
+        private GetExternalIdLinkRepository $getExternalIdLinkRepository,
+        private GetAllVendorWithCategoryService $getAllVendorWithCategoryService
     ) {}
 
-    public function getAllProductDetail($productId) {
+    public function getAllProductDetail(Request $request, $productId) {
         try {
             $resultData = $this->getAllProductDetailService->getAllProductDetail($productId);
+            $dataVendor = $this->getAllVendorWithCategoryService->getAllVendorWithCategory($request);
 
             $productData = $resultData['product'];
             $vendorsData = $resultData['vendors'];
 
-            return view('stock.productdetail', ['product' => $productData, 'vendors' => $vendorsData]);
+            // $externalIdLink = $this->getExternalIdLinkRepository->getExternalIdLink($productData['external_id']);
+
+            return view('stock.productdetail', ['productInfo' => $productData, 'vendorsInfo' => $vendorsData, 'dataVen' => $dataVendor]);
 
         } catch (Exception $error) {
             return response()->json([
@@ -41,10 +48,14 @@ class ProductDetailController extends Controller
             $idProduct = $request->input('idProduct');
             $idVendor = $request->input('idVendor');
 
-            $resultData = $this->addProductDetailService->addProductDetail($idProduct, $idVendor);
+            if ($idVendor == 0) {
+                throw new Exception("Please select material!");
+            }else{
+                $resultData = $this->addProductDetailService->addProductDetail($idProduct, $idVendor);
 
-            toastr()->success('Material added successfully!', 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/product/detail/'.$idProduct)->with('status', 'success');
+                toastr()->success('Material added successfully!', 'Product Detail', ['timeOut' => 3000]);
+                return redirect('/product/detail/'.$idProduct)->with('status', 'success');
+            }
         } catch (Exception $error) {
             toastr()->error($error->getMessage(), 'Product Detail', ['timeOut' => 3000]);
             return redirect('/product/detail/'.$idProduct)->with('status', $error->getMessage());
@@ -57,7 +68,6 @@ class ProductDetailController extends Controller
             $idVendor = $request->input('idVendor');
 
             $resultData = $this->deleteProductDetailService->DeleteProductDetail($idProduct, $idVendor);
-
 
             toastr()->warning('Material deleted successfully!', 'Product Detail', ['timeOut' => 3000]);
             return redirect('/product/detail/'.$idProduct)->with('status', 'success');

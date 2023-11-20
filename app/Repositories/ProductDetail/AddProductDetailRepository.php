@@ -2,10 +2,10 @@
 
 namespace App\Repositories\ProductDetail;
 
+use App\Models\Memproduksi;
 use Exception;
 use App\Models\Product;
 use App\Models\Vendor;
-use App\Models\ProductDetail;
 
 class AddProductDetailRepository
 {
@@ -20,7 +20,7 @@ class AddProductDetailRepository
             }
 
             // Cek apakah relasi product dan vendor sudah ada
-            $existingRelation = ProductDetail::where('idProduct', $idProduct)
+            $existingRelation = Memproduksi::where('idProduct', $idProduct)
                 ->where('idVendor', $idVendor)
                 ->first();
 
@@ -29,7 +29,7 @@ class AddProductDetailRepository
             }
 
             // Tambahkan relasi product dan vendor ke tabel Memproduksi
-            $memproduksi = new ProductDetail();
+            $memproduksi = new Memproduksi();
             $memproduksi->idProduct = $idProduct;
             $memproduksi->idVendor = $idVendor;
             $memproduksi->save();

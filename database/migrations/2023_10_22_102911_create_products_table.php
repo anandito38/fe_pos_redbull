@@ -18,9 +18,11 @@ return new class extends Migration
             $table->integer('hargaJual')->nullable();
             $table->integer('quantity')->nullable();
 
-            // $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreignId('vendor_id')->constrained('vendors')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+        });
+
+        Schema::table('products', function (Blueprint $table) {
+            $table->uuid('external_id')->after('quantity')->nullable();
         });
     }
 
@@ -29,6 +31,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('external_id');
+        });
+
         Schema::dropIfExists('products');
     }
 };
