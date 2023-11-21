@@ -14,8 +14,7 @@ class Booking extends Model
         'kode',
         'totalHarga',
 
-        'customer_id',
-        'payment_id'
+        'customer_id'
     ];
 
     protected $primaryKey = 'id';
@@ -25,7 +24,7 @@ class Booking extends Model
     }
 
     public function payments(){
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class, 'booking_id', 'id');
     }
 
     public function selectedProducts()

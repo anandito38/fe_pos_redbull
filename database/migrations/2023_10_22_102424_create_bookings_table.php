@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('totalHarga');
 
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
