@@ -20,6 +20,10 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->uuid('external_id')->after('customer_id')->nullable();
+        });
     }
 
     /**
@@ -27,6 +31,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('external_id');
+        });
+
         Schema::dropIfExists('bookings');
     }
 };
