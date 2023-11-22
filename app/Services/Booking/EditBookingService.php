@@ -19,22 +19,16 @@ class EditBookingService {
      * @param Request $request
      * @return BookingDTO
      */
-    public function editVendor(Request $request) {
+    public function editBooking(Request $request) {
         try {
             // Validate request
             $request->validate([
                 'id' => 'required|exists:bookings,id',
-                'quantity' => 'required',
-                'kode' => 'required',
-                'totalHarga' => 'required',
                 'customer_id' => 'exists:customers,id'
             ]);
 
             $bookingDTO = new BookingDTO(
                 id: $request->id,
-                quantity: $request->quantity,
-                kode: $request->kode,
-                totalHarga: $request->totalHarga,
                 customer_id: $request->customer_id
             );
 

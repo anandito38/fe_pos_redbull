@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         Schema::table('bookings', function (Blueprint $table) {
-            $table->uuid('external_id')->after('customer_id')->nullable();
+            $table->string('external_id')->nullable()->after('customer_id');
         });
     }
 

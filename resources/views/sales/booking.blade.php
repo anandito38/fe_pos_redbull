@@ -80,26 +80,6 @@
                                                         <input type="hidden" id="id" name="id"
                                                             class="form-control" value="{{$book["id"]}}">
 
-                                                            <div class="mb-3 black-text bold">
-                                                                <label for="InputWarna" class="form-label">Material Name</label>
-                                                                <input type="text" id="id" name="namaBarang" class="form-control" value="">
-                                                            </div>
-
-                                                            <div class="mb-3 black-text bold">
-                                                                <label for="InputWarna" class="form-label ">Brand</label>
-                                                                <input type="text" id="id" name="merek" class="form-control" value="">
-                                                            </div>
-
-                                                            <div class="mb-3 black-text bold">
-                                                                <label for="InputWarna" class="form-label ">Quantity</label>
-                                                                <input type="number" id="id" name="quantity" class="form-control" value="">
-                                                            </div>
-
-                                                            <div class="mb-3 black-text bold">
-                                                                <label for="InputWarna" class="form-label mt-1">Capital Price</label>
-                                                                <input type="number" id="id" name="hargaModal" class="form-control" value="">
-                                                            </div>
-
                                                             <label for="InputWarna" class="form-label mt-1 black-text bold">Customer Information</label>
                                                                 <select type="text" class="form-select form-control black-text" id=""
                                                                     name="customer_id">
@@ -185,30 +165,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body d-flex flex-column">
                 <form method="POST" action="/book/add">
                     @csrf
                     @method("POST")
-
-                    <div class="mb-3 black-text bold">
-                        <label for="InputWarna" class="form-label">Material Name</label>
-                        <input type="text" id="id" name="namaBarang" class="form-control" placeholder="-- Enter Material Name --">
-                    </div>
-
-                    <div class="mb-3 black-text bold">
-                        <label for="InputWarna" class="form-label mt-1">Brand</label>
-                        <input type="text" id="id" name="merek" class="form-control" placeholder="-- Enter Brand --">
-                    </div>
-
-                    <div class="mb-3 black-text bold">
-                        <label for="InputWarna" class="form-label mt-1">Quantity</label>
-                        <input type="number" id="id" name="quantity" class="form-control" placeholder="-- Enter Quantity --">
-                    </div>
-
-                    <div class="mb-3 black-text bold">
-                        <label for="InputWarna" class="form-label mt-2">Capital Price</label>
-                        <input type="number" id="id" name="hargaModal" class="form-control" placeholder="-- Enter Capital Price --">
-                    </div>
 
                     <div class="mb-3 black-text bold">
                     <label for="InputWarna" class="form-label mt-2">Customer Information</label>
@@ -220,6 +180,51 @@
                             @endforeach
                         </select>
                     </div>
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                    <button type="button" class="btn btn-warning float-left" data-toggle="modal" data-target="#exampleModalCenterAddBook">Add Customer</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add Data Book Customer-->
+<div class="modal fade" id="exampleModalCenterAddBook" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">New Data Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/book/addcustomer">
+                    @csrf
+                    @method("POST")
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Full Name</label>
+                        <input type="text" id="id" name="fullName" class="form-control black-text"
+                            placeholder="-- Enter Fullname --">
+
+                        <label for="InputWarna" class="form-label mt-3">Nickname</label>
+                        <input type="text" id="id" name="nickname" class="form-control black-text"
+                            placeholder="-- Enter Nickname --">
+
+                        <label for="InputWarna" class="form-label mt-3">Phone Number</label>
+                        <input type="text" id="id" name="phoneNumber" class="form-control black-text"
+                            placeholder="-- Enter PhoneNumber --">
+
+                        <label for="InputWarna" class="form-label mt-3">Address</label>
+                        <input type="text" id="id" name="address" class="form-control black-text"
+                            placeholder="-- Enter Address --">
+                    </div>
+
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>
             </div>

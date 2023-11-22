@@ -14,12 +14,13 @@ class Booking extends Model
         'quantity',
         'kode',
         'totalHarga',
-
+        'external_id',
         'customer_id',
-        'external_id'
+
     ];
 
     protected $primaryKey = 'id';
+    protected $table = 'bookings';
 
     public static function boot()
     {

@@ -23,25 +23,18 @@ class AddBookingService {
     public function addBooking(Request $request) {
         try {
             $request->validate([
-                'quantity' => 'required',
-                'kode' => 'required',
-                'totalHarga' => 'required',
                 'customer_id' => 'required|exists:customers,id'
             ]);
 
             $bookingDTO = new BookingDTO(
                 id : null,
-                quantity : $request->quantity,
-                kode : $request->kode,
-                totalHarga : $request->totalHarga,
                 customer_id : $request->customer_id,
             );
 
             $bookingResult = $this->addBookingRepository->AddBooking($bookingDTO);
 
             return ([
-                'kode' => $bookingResult->getKode(),
-                'totalHarga' => $bookingResult->getTotalHarga()
+                'customer_id' => $bookingResult->getCustomer_id()
             ]);
 
         } catch (Exception $error) {

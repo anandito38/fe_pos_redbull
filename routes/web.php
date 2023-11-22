@@ -88,6 +88,7 @@ Route::middleware('is_Auth')->group(function(){
     Route::post('/book/add', [BookingController::class, 'addBook']);
     Route::put('/book/edit', [BookingController::class, 'editBook']);
     Route::delete('/book/delete', [BookingController::class, 'deleteBook']);
+    Route::post('/book/addcustomer', [BookingController::class, 'addCustomerBook']);
 });
 
 Route::middleware('is_Auth')->group(function(){
