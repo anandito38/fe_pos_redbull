@@ -28,7 +28,6 @@ class ProductController extends Controller
     public function getAllProduct(Request $request) {
         try {
             $resultData = $this->getAllProductService->getAllProduct($request);
-
             return view('stock.product', ['productInfo' => $resultData]);
 
         } catch (Exception $error) {
