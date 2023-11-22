@@ -93,7 +93,7 @@
                 </a>
                 <div id="collapseSales" class="collapse" aria-labelledby="headingSales" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/booking">
+                        <a class="collapse-item" href="/book">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
                         </a>
                         <a class="collapse-item" href="/invoice">
@@ -127,6 +127,8 @@
                     <div class="float-left black-text">
                         @if (url('/dashboard') == url()->current())
                         <h5>DASHBOARD</h5>
+                        @elseif (url('/monitoring') == url()->current())
+                        <h5>MONITORING</h5>
                         @elseif (url('/admin') == url()->current())
                         <h5>ADMIN SHEET INFORMATION</h5>
                         @elseif (url('/customer') == url()->current())
@@ -135,14 +137,14 @@
                         <h5>VENDOR SHEET INFORMATION</h5>
                         @elseif (url('/product') == url()->current())
                         <h5>PRODUCT SHEET INFORMATION</h5>
-                        @elseif (url('/booking') == url()->current())
-                        <h5>BOOKING SHEET INFORMATION</h5>
-                        @elseif (url('/invoice') == url()->current())
-                        <h5>INVOICE SHEET INFORMATION</h5>
-                        @elseif (url('/monitoring') == url()->current())
-                        <h5>MONITORING</h5>
+                        @elseif (Str::contains(url()->current(), '/product/detail'))
+                        <h5>PRODUCT DETAIL INFORMATION</h5>
                         @elseif (url('/category') == url()->current())
                         <h5>CATEGORY SHEET INFORMATION</h5>
+                        @elseif (url('/book') == url()->current())
+                        <h5>BOOKING SHEET INFORMATION</h5>
+                        @elseif (Str::contains(url()->current(), '/book/detail'))
+                        <h5>BOOKING DETAIL INFORMATION</h5>
                         @endif
                     </div>
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

@@ -13,14 +13,17 @@ class Payment extends Model
         'totalHargaPembayaran',
         'barcode',
 
-        'admin_id'
+        'admin_id',
+        'booking_id'
     ];
+
+    protected $primaryKey = 'id';
 
     public function users(){
         return $this->belongsTo(User::class);
     }
 
     public function bookings(){
-        return $this->hasMany(Booking::class, 'payment_id', 'id');
+        return $this->belongsTo(Booking::class);
     }
 }

@@ -18,7 +18,6 @@ class BookingSeeder extends Seeder
             'kode' => 'B-001',
             'totalHarga' => '200000',
             'customer_id' => 1,
-            'payment_id' => 1,
         ]);
     }
 }

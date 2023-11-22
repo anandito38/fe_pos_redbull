@@ -5,7 +5,6 @@ namespace App\Repositories\Vendor;
 use Exception;
 
 use App\Models\Vendor;
-use App\DTO\VendorDTO;
 
 class GetAllVendorWithCategoryRepository
 {

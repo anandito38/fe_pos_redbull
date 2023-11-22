@@ -18,8 +18,11 @@ return new class extends Migration
             $table->bigInteger('totalHarga');
 
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+        });
+
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('external_id')->nullable()->after('customer_id');
         });
     }
 
@@ -28,6 +31,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('external_id');
+        });
+
         Schema::dropIfExists('bookings');
     }
 };

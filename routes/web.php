@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingDetailController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
@@ -81,17 +83,31 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/product/detail/delete', [ProductDetailController::class, 'deleteProductDetail']);
 });
 
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/book', [BookingController::class, 'getAllBookWithCustomer'])->name('book');
+    Route::post('/book/add', [BookingController::class, 'addBook']);
+    Route::put('/book/edit', [BookingController::class, 'editBook']);
+    Route::delete('/book/delete', [BookingController::class, 'deleteBook']);
+    Route::post('/book/addcustomer', [BookingController::class, 'addCustomerBook']);
+});
+
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/book/detail/{id}', [BookingDetailController::class, 'getAllBookDetail'])->name('bookdetail');
+    Route::post('/book/detail/add', [BookingDetailController::class, 'addBookDetail']);
+    Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookDetail']);
+});
+
 Route::group([], function(){
     Route::get('/404', function () {
         return view('error.404');
     });
 
     Route::get('/addcart', function () {
-        return view('checkout.cart');
+        return view('booking.cart');
     });
 
     Route::get('/checkout', function () {
-        return view('checkout.invoice');
+        return view('booking.invoice');
     });
 });
 

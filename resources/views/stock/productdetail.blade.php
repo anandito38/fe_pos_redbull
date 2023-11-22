@@ -3,6 +3,7 @@
 {{-- {{dd($productInfo)}} --}}
 <div class="container-fluid">
     @if (isset($productInfo))
+    {{-- <a class="mb-2" href="/dashboard"> &larr; Back to Product Sheet</a> --}}
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="card shadow mb-4">
