@@ -31,7 +31,7 @@ class AddBookingRepository {
             $tanggalFormatted = date_create_from_format('dmY', date('dmY'))->format('dmy');
             $waktuFormatted = date_create_from_format('H:i:s', date('H:i:s'))->format('H:i');
             $lastDigits = substr($newCustomer["phoneNumber"], -4);
-            $booking->kode = sprintf("%s/%s/%s/%s", str_replace(' ', '/', $nameArray[0]), $lastDigits, $tanggalFormatted, $waktuFormatted);
+            $booking->kode = sprintf("%s/%s/%s/%s", str_replace(' ', '/', strtoupper($nameArray[0])), $lastDigits, $tanggalFormatted, $waktuFormatted);
 
             $booking->save();
             return $bookingDTO;

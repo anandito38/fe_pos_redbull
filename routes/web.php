@@ -92,9 +92,9 @@ Route::middleware('is_Auth')->group(function(){
 });
 
 Route::middleware('is_Auth')->group(function(){
-    Route::get('/book/detail/{id}', [BookingDetailController::class, 'getAllBookDetail'])->name('bookdetail');
-    Route::post('/book/detail/add', [BookingDetailController::class, 'addBookDetail']);
-    Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookDetail']);
+    Route::get('/book/detail/{id}', [BookingDetailController::class, 'getAllBookingDetail'])->name('bookdetail');
+    Route::post('/book/detail/add', [BookingDetailController::class, 'addBookingDetail']);
+    Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookingDetail']);
 });
 
 Route::group([], function(){

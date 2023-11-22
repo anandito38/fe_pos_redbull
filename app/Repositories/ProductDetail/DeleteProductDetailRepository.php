@@ -16,11 +16,11 @@ class DeleteProductDetailRepository
 
             if (!$relation) {
                 throw new Exception('Product-Vendor relation not found');
-            }
-
-            Memproduksi::where('idProduct', $idProduct)
+            }else{
+                Memproduksi::where('idProduct', $idProduct)
                 ->where('idVendor', $idVendor)
                 ->delete();
+            }
 
             return $relation;
         } catch (Exception $error) {

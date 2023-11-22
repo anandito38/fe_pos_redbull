@@ -35,6 +35,7 @@
                             <th>Total Price</th>
                             <th>Customer Nickname</th>
                             <th>Customer Phone Number</th>
+                            <th>Detail</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -52,6 +53,13 @@
                             <td>Rp{{ number_format($book["totalHarga"], 0, ',', '.') }}</td>
                             <td>{{$book["customer_nickname"]}}</td>
                             <td>{{$book["customer_phoneNumber"]}}</td>
+                            <td>
+                                <a href="/book/detail/{{$book["id"]}}">
+                                    <button type="button" class="btn-sm btn-primary">
+                                        <i class="fa fa-window-restore"></i>
+                                    </button>
+                                </a>
+                            </td>
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"

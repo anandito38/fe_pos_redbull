@@ -6,34 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
 
-use App\Services\ProductDetail\GetAllProductDetailService;
-use App\Services\ProductDetail\AddProductDetailService;
-use App\Services\ProductDetail\DeleteProductDetailService;
-use App\Repositories\ProductDetail\GetExternalIdLinkRepository;
-use App\Services\Vendor\GetAllVendorWithCategoryService;
+use App\Services\Product\GetAllProductService;
+use App\Services\BookingDetail\GetAllBookingDetailService;
+use App\Services\BookingDetail\AddBookingDetailService;
+use App\Services\BookingDetail\DeleteBookingDetailService;
 
 class BookingDetailController extends Controller
 {
 
     public function __construct(
-        // private GetAllProductDetailService $getAllProductDetailService,
-        // private AddProductDetailService $addProductDetailService,
-        // private DeleteProductDetailService $deleteProductDetailService,
-        // private GetExternalIdLinkRepository $getExternalIdLinkRepository,
-        // private GetAllVendorWithCategoryService $getAllVendorWithCategoryService
+        private GetAllProductService $getAllProductService,
+        private GetAllBookingDetailService $getAllBookingDetailService,
+        private AddBookingDetailService $addBookingDetailService,
+        private DeleteBookingDetailService $deleteBookingDetailService
     ) {}
 
-    public function getAllBookDetail(Request $request, $productId) {
+    public function getAllBookingDetail(Request $request, $bookingId) {
         try {
-            // $resultData = $this->getAllProductDetailService->getAllProductDetail($productId);
-            // $dataVendor = $this->getAllVendorWithCategoryService->getAllVendorWithCategory($request);
+            $resultData = $this->getAllBookingDetailService->getAllBookingDetail($bookingId);
+            $productData = $this->getAllProductService->getAllProduct($request);
 
-            // $productData = $resultData['product'];
-            // $vendorsData = $resultData['vendors'];
-
-            // $externalIdLink = $this->getExternalIdLinkRepository->getExternalIdLink($productData['external_id']);
-
-            // return view('stock.productdetail', ['productInfo' => $productData, 'vendorsInfo' => $vendorsData, 'dataVen' => $dataVendor]);
+            $bookingData = $resultData['booking'];
+            $productsData = $resultData['products'];
+            // dd($bookingData, $productsData, $productData);
+            return view('sales.bookingdetail', ['bookingInfo' => $bookingData, 'productsInfo' => $productsData, 'dataProduct' => $productData]);
 
         } catch (Exception $error) {
             return response()->json([
@@ -43,37 +39,38 @@ class BookingDetailController extends Controller
         }
     }
 
-    public function addBookDetail(Request $request){
+    public function addBookingDetail(Request $request){
         try {
-            // $idProduct = $request->input('idProduct');
-            // $idVendor = $request->input('idVendor');
+            $idBook = $request->input('idBook');
+            $idProduct = $request->input('idProduct');
 
-            // if ($idVendor == 0) {
-            //     throw new Exception("Please select material!");
-            // }else{
-            //     $resultData = $this->addProductDetailService->addProductDetail($idProduct, $idVendor);
+            if ($idProduct == 0) {
+                throw new Exception("Please select product!");
+            }else{
 
-            //     toastr()->success('Material added successfully!', 'Product Detail', ['timeOut' => 3000]);
-            //     return redirect('/product/detail/'.$idProduct)->with('status', 'success');
-            // }
+                $resultData = $this->addBookingDetailService->AddBookingDetail($idBook, $idProduct);
+
+                toastr()->success('Product added successfully!', 'Booking Detail', ['timeOut' => 3000]);
+                return redirect('/book/detail/'.$idBook)->with('status', 'success');
+            }
         } catch (Exception $error) {
-            toastr()->error($error->getMessage(), 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/product/detail/'.$idProduct)->with('status', $error->getMessage());
+            toastr()->error($error->getMessage(), 'Booking Detail', ['timeOut' => 3000]);
+            return redirect('/book/detail/'.$idBook)->with('status', $error->getMessage());
         }
     }
 
-    public function deleteBookDetail(Request $request){
+    public function deleteBookingDetail(Request $request){
         try {
-            // $idProduct = $request->input('idProduct');
-            // $idVendor = $request->input('idVendor');
+            $idBook = $request->input('idBook');
+            $idProduct = $request->input('idProduct');
 
-            // $resultData = $this->deleteProductDetailService->DeleteProductDetail($idProduct, $idVendor);
+            $resultData = $this->deleteBookingDetailService->DeleteBookingDetail($idBook, $idProduct);
 
-            toastr()->warning('Material deleted successfully!', 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/product/detail/'.$idProduct)->with('status', 'success');
+            toastr()->warning('Product deleted successfully!', 'Booking Detail', ['timeOut' => 3000]);
+            return redirect('/book/detail/'.$idBook)->with('status', 'success');
         } catch (Exception $error) {
-            toastr()->error($error->getMessage(), 'Product Detail', ['timeOut' => 3000]);
-            return redirect('/product/detail/'.$idProduct)->with('status', $error->getMessage());
+            toastr()->error($error->getMessage(), 'Booking Detail', ['timeOut' => 3000]);
+            return redirect('/book/detail/'.$idBook)->with('status', $error->getMessage());
         }
     }
 }
