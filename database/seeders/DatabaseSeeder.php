@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Booking;
-use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,10 +17,11 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             VendorSeeder::class,
             InvoiceSeeder::class,
-            PaymentSeeder::class,
             BookingSeeder::class,
+            PaymentSeeder::class,
             ProductSeeder::class,
             MemproduksiSeeder::class,
+            MemilihSeeder::class,
         ]);
     }
 }

@@ -30,7 +30,7 @@ class AddVendorService {
                 'category_id' => 'required|exists:categories,id'
             ]);
 
-            $vendorDTO = new vendorDTO(
+            $vendorDTO = new VendorDTO(
                 id : null,
                 namaBarang: $request->namaBarang,
                 merek : $request->merek,
