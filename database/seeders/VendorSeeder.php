@@ -28,5 +28,21 @@ class VendorSeeder extends Seeder
             'hargaModal' => '60000',
             'category_id' => 1
         ]);
+
+        Vendor::create([
+            'namaBarang' => 'Chocolate',
+            'merek' => 'GKC',
+            'quantity' => '30',
+            'hargaModal' => '60000',
+            'category_id' => 2
+        ]);
+
+        Vendor::create([
+            'namaBarang' => 'Matcha',
+            'merek' => 'GKC',
+            'quantity' => '30',
+            'hargaModal' => '60000',
+            'category_id' => 2
+        ]);
     }
 }

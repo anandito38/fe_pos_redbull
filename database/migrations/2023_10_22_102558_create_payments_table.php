@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('totalPrice');
-            $table->string('barcode');
+            $table->string('barcode')->nullable();
+            $table->string('status')->nullable();
+            $table->string('metode');
 
             $table->foreignId('admin_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');

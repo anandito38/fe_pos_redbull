@@ -16,7 +16,7 @@ class InvoiceSeeder extends Seeder
         Invoice::create([
             'kodeInvoice' => 'INV-001',
             'tanggalPembelian' => '2021-01-01',
-            'admin_id' => 1
+            'payment_id' => 1
         ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kodeInvoice');
             $table->timestamp('tanggalPembelian');
 
-            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

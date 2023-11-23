@@ -13,7 +13,7 @@ class MemilihSeeder extends Seeder
      */
     public function run(): void
     {
-        $BookId = 8;
+        $BookId = 1;
 
         Memilih::create([
             'idProduct' => 1,

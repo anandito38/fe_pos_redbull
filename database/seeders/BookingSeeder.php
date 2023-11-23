@@ -16,7 +16,7 @@ class BookingSeeder extends Seeder
         Booking::create([
             'quantity' => '100',
             'kode' => 'B-001',
-            'totalHarga' => '200000',
+            'totalHarga' => 15000,
             'customer_id' => 1,
         ]);
     }

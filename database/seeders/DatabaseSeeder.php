@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             CategorySeeder::class,
             VendorSeeder::class,
-            InvoiceSeeder::class,
             BookingSeeder::class,
             PaymentSeeder::class,
             ProductSeeder::class,
+            InvoiceSeeder::class,
             MemproduksiSeeder::class,
             MemilihSeeder::class,
         ]);
