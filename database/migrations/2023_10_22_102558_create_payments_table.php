@@ -17,8 +17,8 @@ return new class extends Migration
             $table->boolean('status')->default(false);
             $table->string('metode');
 
-            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('booking_id')->unique()->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

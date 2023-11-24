@@ -109,6 +109,10 @@ Route::middleware('is_Auth')->group(function(){
 });
 
 Route::group([], function(){
+    // Route::get('/payment', function () {
+    //     return view('booking.payment');
+    // });
+
     Route::get('/404', function () {
         return view('error.404');
     });

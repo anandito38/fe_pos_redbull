@@ -14,10 +14,8 @@ class PaymentSeeder extends Seeder
     public function run(): void
     {
         Payment::create([
-            'status' => 'Belum Dibayar',
-            'barcode' => '1234567890',
+            'barcode' => 'blabla.png',
             'metode' => 'QRIS',
-            'admin_id' => 1,
             'booking_id' => 1,
         ]);
     }

@@ -96,6 +96,9 @@
                         <a class="collapse-item" href="/book">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
                         </a>
+                        <a class="collapse-item" href="/payment">
+                            <i class="fa-solid fa-money-bill" style="margin-right: 5px;"></i>PAYMENT SHEET
+                        </a>
                         <a class="collapse-item" href="/invoice">
                             <i class="fa-solid fa-receipt" style="margin-right: 5px;"></i>INVOICE SHEET
                         </a>
@@ -145,6 +148,10 @@
                         <h5>BOOKING SHEET INFORMATION</h5>
                         @elseif (Str::contains(url()->current(), '/book/detail'))
                         <h5>BOOKING DETAIL INFORMATION</h5>
+                        @elseif (url('/invoice') == url()->current())
+                        <h5>INVOICE SHEET INFORMATION</h5>
+                        @elseif (url('/payment') == url()->current())
+                        <h5>PAYMENT SHEET INFORMATION</h5>
                         @endif
                     </div>
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

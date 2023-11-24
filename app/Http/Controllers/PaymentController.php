@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
 
+use App\Services\Payment\GetAllPaymentWithBookingService;
+
 class PaymentController extends Controller
 {
     public function __construct(
-
+        private GetAllPaymentWithBookingService $getAllPaymentWithBookingService
     ) {}
 
     /**
@@ -19,10 +21,9 @@ class PaymentController extends Controller
      */
     public function getAllPaymentWithBooking(Request $request) {
         try {
-            // $resultData = $this->getAllBookingWithCustomerService->getAllBookingWithCustomer($request);
-            // $dataCustomer = $this->getAllCustomerService->getAllCustomer($request);
+            $resultData = $this->getAllPaymentWithBookingService->getAllPaymentWithBooking($request);
 
-            // return view('sales.booking', ['bookingInfo' => $resultData, 'customerInfo' => $dataCustomer]);
+            return view('sales.payment', ['paymentInfo' => $resultData]);
 
         } catch (Exception $error) {
             return response()->json([
