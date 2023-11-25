@@ -14,8 +14,6 @@ class InvoiceSeeder extends Seeder
     public function run(): void
     {
         Invoice::create([
-            'kodeInvoice' => 'INV-001',
-            'tanggalPembelian' => '2021-01-01',
             'payment_id' => 1
         ]);
     }
