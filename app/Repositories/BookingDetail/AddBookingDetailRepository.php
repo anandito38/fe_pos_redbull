@@ -25,7 +25,7 @@ class AddBookingDetailRepository
                 ->first();
 
             if ($existingRelation) {
-                throw new Exception('This booking and product relation already exists');
+                throw new Exception('The product already exists in the booking');
             }
 
             // Tambahkan relasi product dan vendor ke tabel Memproduksi

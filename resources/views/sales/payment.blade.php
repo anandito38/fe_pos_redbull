@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-{{dd($paymentInfo)}}
+{{-- {{dd($paymentInfo)}} --}}
 <div class="container-fluid">
 
     <div class="card shadow mb-4">
@@ -29,6 +29,8 @@
                             <th>Booking Code</th>
                             <th>Quantity</th>
                             <th>Total Price</th>
+                            <th>Metode</th>
+                            <th>Payment Status</th>
                             <th>Verified By</th>
                             <th>Barcode</th>
                             <th>Edit</th>
@@ -38,63 +40,93 @@
                         @php
                             $iterator = 1;
                         @endphp
-                        @foreach ($bookingInfo as $book)
+                        @foreach ($paymentInfo as $payment)
                         <tr>
                             <td>{{$iterator}}</td>
-                            <td>{{$book["kode"]}}</td>
-                            <td>{{$book["quantity"]}}</td>
-                            <td>Rp{{ number_format($book["totalHarga"], 0, ',', '.') }}</td>
-                            <td>{{$book["customer_nickname"]}}</td>
-                            <td>{{$book["customer_phoneNumber"]}}</td>
+                            <td>{{$payment["kode"]}}</td>
+                            <td>{{$payment["quantity"]}}</td>
+                            <td>Rp{{ number_format($payment["totalHarga"], 0, ',', '.') }}</td>
+                            <td>{{$payment["metode"]}}</td>
+                            @if ($payment["status"] == null)
+                                <td>
+                                    <button type="button" class="btn btn-danger disabled-btn">Unpaid</button>
+                                </td>
+                            @else
+                                <td>
+                                    <button type="button" class="btn btn-success disabled-btn">Paid</button>
+                                </td>
+                            @endif
+                            @if ($payment["nickname"] == null)
+                                <td>
+                                    <button type="button" class="btn btn-warning disabled-btn">Not Verified</button>
+                                </td>
+                            @else
+                                <td>
+                                    <button type="button" class="btn btn-success disabled-btn">{{$payment["nickname"]}}</button>
+                                </td>
+                            @endif
+                            <td>{{$payment["barcode"]}}</td>
                             <td>
-                                <a href="/book/detail/{{$book["id"]}}">
-                                    <button type="button" class="btn-sm btn-primary">
-                                        <i class="fa fa-window-restore"></i>
-                                    </button>
-                                </a>
-                            </td>
-                            <td>
-                                <!-- Button trigger modal Edit -->
-                                <button type="button" class="btn-sm btn-info" data-toggle="modal"
-                                    data-target="#exampleModalCenterEdit{{$book["id"]}}">
-                                    <i class="fa fa-edit"></i>
-                                </button>
+                                @if ($payment["nickname"] != null)
+                                    <button type="button" class="btn-sm btn-info disabled-btn-gray" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="fa fa-check"></i>
+                                @else
+                                    <!-- Button trigger modal Edit -->
+                                    <button type="button" class="btn-sm btn-info" data-toggle="modal"
+                                    data-target="#exampleModalCenterEdit{{$payment["id"]}}">
+                                    <i class="fa fa-edit"></i></button>
+                                @endif
 
                                 <!-- Modal Update Data -->
-                                <div class="modal fade" id="exampleModalCenterEdit{{$book["id"]}}" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="exampleModalCenterEdit{{$payment["id"]}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Booking</h5>
+                                                <h5 class="modal-title black-text bold" id="exampleModalLongTitle">Edit Payment</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="/book/edit">
+                                                <form method="POST" action="/payment/edit" id="paymentForm">
                                                     @csrf
                                                     @method("PUT")
 
                                                     <div class="mb-3 black-text bold">
                                                         <input type="hidden" id="id" name="id"
-                                                            class="form-control" value="{{$book["id"]}}">
+                                                            class="form-control" value="{{$payment["id"]}}">
 
-                                                            <label for="InputWarna" class="form-label mt-1 black-text bold">Customer Information</label>
-                                                                <select type="text" class="form-select form-control black-text" id=""
-                                                                    name="customer_id">
-                                                                    <option value="{{$book["customer_id"]}}" name="customer_id" disabled selected hidden>{{$book["customer_nickname"] . " - " . $book["customer_phoneNumber"]}}</option>
-                                                                    @foreach ($customerInfo as $customer)
-                                                                    <option value="{{ $customer->getId() }}" name="customer_id"> {{$customer->getNickname() . " - " . $customer->getPhoneNumber()}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                        <label for="InputWarna" class="form-label mt-2 black-text bold">Verified By</label>
+                                                            <select type="text" class="form-select form-control black-text" id="verifiedBy"
+                                                                name="admin_id">
+                                                                <option value="" disabled selected hidden>Choose...</option>
+                                                                @foreach ($adminInfo as $admin)
+                                                                <option value="{{$admin->getId()}}" name="admin_id"> {{$admin->getNickname()}}</option>
+                                                                @endforeach
+                                                            </select>
                                                     </div>
 
                                                     <div class="mb-3 float-right">
-                                                        <button type="sumbit" class="btn btn-info">Update</button>
+                                                        <button type="button" class="btn btn-info" id="updateButton">Update</button>
+                                                        <button type="submit" class="btn btn-info" id="submitButton" style="display: none;">Update</button>
                                                     </div>
                                                 </form>
+
+                                                <script>
+                                                    document.getElementById('updateButton').addEventListener('click', function() {
+                                                        var verifiedBy = document.getElementById('verifiedBy').value;
+
+                                                        if (verifiedBy === '') {
+                                                            $('#warningModal').modal('show');
+                                                        } else {
+                                                            document.getElementById('submitButton').style.display = 'inline-block';
+                                                            document.getElementById('updateButton').style.display = 'none';
+                                                        }
+                                                    });
+                                                </script>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -104,7 +136,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            {{-- <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
                                     data-target="#exampleModalCenterDelete{{$book["id"]}}">
@@ -140,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                         @php
                             $iterator++;
@@ -152,9 +184,11 @@
         </div>
     </div>
 
+
+
 </div>
 
-<!-- Modal Add Data-->
+{{-- <!-- Modal Add Data-->
 <div class="modal fade" id="exampleModalCenterAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -230,6 +264,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<!-- Modal Verified-->
+<div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="warningModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title red-text bold" id="warningModalLabel">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body black-text bold">
+                Please fill in the "Verified By" field before updating.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
