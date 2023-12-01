@@ -2,6 +2,10 @@
     color: black;
 }
 
+.red-text {
+    color: red;
+}
+
 .bold-text {
     font-weight: 900;
 }
@@ -24,4 +28,14 @@
 
 .text-base{
     color: #d69922;
+}
+
+.disabled-btn-gray {
+    pointer-events: none;
+    background-color: #ccc;
+    color: #999;
+}
+
+.disabled-btn {
+    pointer-events: none;
 }

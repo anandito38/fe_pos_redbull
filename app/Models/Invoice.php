@@ -16,7 +16,7 @@ class Invoice extends Model
         'admin_id'
     ];
 
-    public function users(){
-        return $this->belongsTo(User::class);
+    public function payments(){
+        return $this->belongsTo(Payment::class);
     }
 }
