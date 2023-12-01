@@ -14,9 +14,8 @@ class PaymentSeeder extends Seeder
     public function run(): void
     {
         Payment::create([
-            'totalPrice' => '100000',
-            'barcode' => '1234567890',
-            'admin_id' => 1,
+            'barcode' => 'blabla.png',
+            'metode' => 'QRIS',
             'booking_id' => 1,
         ]);
     }

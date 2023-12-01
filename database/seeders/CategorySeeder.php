@@ -24,5 +24,9 @@ class CategorySeeder extends Seeder
         Category::create([
             'namaCategory' => 'Packaging'
         ]);
+
+        Category::create([
+            'namaCategory' => 'Essense Syrup'
+        ]);
     }
 }

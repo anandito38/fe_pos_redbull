@@ -18,8 +18,13 @@ class ProductSeeder extends Seeder
             'kode' => 'P-001',
             'hargaJual' => '10000',
             'quantity' => '100',
-            // 'booking_id' => 1,
-            // 'vendor_id' => 1
+        ]);
+
+        Product::create([
+            'nama' => 'Mochi Bantal Matcha',
+            'kode' => 'P-001',
+            'hargaJual' => '15000',
+            'quantity' => '50',
         ]);
     }
 }

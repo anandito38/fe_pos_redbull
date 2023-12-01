@@ -6,6 +6,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingDetailController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\VendorController;
@@ -97,7 +99,20 @@ Route::middleware('is_Auth')->group(function(){
     Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookingDetail']);
 });
 
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/payment', [PaymentController::class, 'getAllPaymentWithBooking'])->name('payment');
+    Route::put('/payment/edit', [PaymentController::class, 'editPayment']);
+});
+
+Route::middleware('is_Auth')->group(function(){
+    Route::get('/invoice', [InvoiceController::class, 'getAllInvoiceWithPayment'])->name('invoice');
+});
+
 Route::group([], function(){
+    // Route::get('/payment', function () {
+    //     return view('booking.payment');
+    // });
+
     Route::get('/404', function () {
         return view('error.404');
     });

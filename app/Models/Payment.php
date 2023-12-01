@@ -10,8 +10,9 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'totalHargaPembayaran',
+        'status',
         'barcode',
+        'metode',
 
         'admin_id',
         'booking_id'
@@ -25,5 +26,9 @@ class Payment extends Model
 
     public function bookings(){
         return $this->belongsTo(Booking::class);
+    }
+
+    public function invoices(){
+        return $this->hasMany(Invoice::class, 'payment_id', 'id');
     }
 }
