@@ -101,7 +101,7 @@ Route::middleware('is_Auth')->group(function(){
 
 Route::middleware('is_Auth')->group(function(){
     Route::get('/payment', [PaymentController::class, 'getAllPaymentWithBooking'])->name('payment');
-    Route::post('/payment/edit', [PaymentController::class, 'editPayment']);
+    Route::put('/payment/edit', [PaymentController::class, 'editPayment']);
 });
 
 Route::middleware('is_Auth')->group(function(){

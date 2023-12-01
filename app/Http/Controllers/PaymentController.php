@@ -8,12 +8,14 @@ use Exception;
 
 use App\Services\Admin\GetAllAdminService;
 use App\Services\Payment\GetAllPaymentWithBookingService;
+use App\Services\Payment\EditPaymentService;
 
 class PaymentController extends Controller
 {
     public function __construct(
         private GetAllPaymentWithBookingService $getAllPaymentWithBookingService,
-        private GetAllAdminService $getAllAdminService
+        private GetAllAdminService $getAllAdminService,
+        private EditPaymentService $editPaymentService
     ) {}
 
     /**
@@ -28,6 +30,7 @@ class PaymentController extends Controller
             return view('sales.payment', ['paymentInfo' => $resultData, 'adminInfo' => $dataAdmin]);
 
         } catch (Exception $error) {
+            echo $error->getMessage();
             return response()->json([
                 'status' => 'error',
                 'message' => $error->getMessage(),
@@ -37,7 +40,7 @@ class PaymentController extends Controller
 
     public function editPayment(Request $request){
         try {
-            // $resultData = $this->editBookingService->editBooking($request);
+            $resultData = $this->editPaymentService->editPayment($request);
 
             toastr()->info('Payment updated successfully!', 'Payment', ['timeOut' => 3000]);
             return redirect('/payment')->with('status', 'success');
