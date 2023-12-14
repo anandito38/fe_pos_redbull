@@ -4,6 +4,7 @@ namespace App\Repositories\Payment;
 
 use Exception;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class EditPaymentRepository
 {
@@ -11,7 +12,9 @@ class EditPaymentRepository
     {
         try {
             $paymentId = $request->input('id');
-            $adminId = $request->input('admin_id');
+            $metode = $request->input('metode');
+
+            $loggedInUser = Auth::user();
 
             $payment = Payment::find($paymentId);
 
@@ -19,7 +22,8 @@ class EditPaymentRepository
                 throw new Exception('Payment not found');
             }
 
-            $payment->admin_id = $adminId;
+            $payment->admin_id = $loggedInUser->id;
+            $payment->metode = $metode;
             $payment->status = true;
             $payment->save();
 
