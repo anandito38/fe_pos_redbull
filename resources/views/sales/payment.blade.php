@@ -48,7 +48,15 @@
                             <td>{{$payment["kode"]}}</td>
                             <td>{{$payment["quantity"]}}</td>
                             <td>Rp{{ number_format($payment["totalHarga"], 0, ',', '.') }}</td>
-                            <td>{{$payment["metode"]}}</td>
+                            @if ($payment["metode"] == null)
+                            <td>
+                                <button type="button" class="btn btn-danger disabled-btn">Not Yet Selected</button>
+                            </td>
+                            @else
+                            <td>
+                                <button type="button" class="btn btn-success disabled-btn">{{$payment["metode"]}}</button>
+                            </td>
+                            @endif
                             @if ($payment["status"] == null)
                             <td>
                                 <button type="button" class="btn btn-danger disabled-btn">Unpaid</button>
