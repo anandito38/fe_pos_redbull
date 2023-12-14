@@ -12,7 +12,7 @@ class EditPaymentService
     )
     {}
 
-    public function editPayment($request){
+    public function editPaymentService($request){
         try {
             return $this->editpaymentRepository->editPayment($request);
         } catch (Exception $error) {

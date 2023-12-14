@@ -47,6 +47,7 @@
                         @endphp
                         @foreach ($bookingInfo as $book)
                         <tr>
+                            @if ($book["is_payment"] == 0)
                             <td>{{$iterator}}</td>
                             <td>{{$book["kode"]}}</td>
                             <td>{{$book["quantity"]}}</td>
@@ -148,10 +149,11 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        @php
+                            @php
                             $iterator++;
-                        @endphp
+                            @endphp
+                            @endif
+                        </tr>
                         @endforeach
                         @endif
                     </tbody>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('barcode')->nullable();
             $table->boolean('status')->default(false);
-            $table->string('metode');
+            $table->string('metode')->nullable();
 
             $table->foreignId('admin_id')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('booking_id')->unique()->constrained('bookings')->onDelete('cascade')->onUpdate('cascade');
