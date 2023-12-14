@@ -4,6 +4,7 @@ namespace App\Repositories\Payment;
 
 use Exception;
 use App\Models\Payment;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\Invoice\AddInvoiceRepository;
 
@@ -33,11 +34,18 @@ class EditPaymentRepository
             $payment->status = true;
             $payment->save();
 
-            $invoiceData = [
-                'payment_id' => $payment->id,
-            ];
+            $booking = Booking::where('id', $payment->booking_id)->first();
 
-            $this->addInvoiceRepository->addInvoice($invoiceData);
+            if ($booking) {
+                $booking->is_payment = true;
+                $booking->save();
+            }
+
+            // $invoiceData = [
+            //     'payment_id' => $payment->id,
+            // ];
+
+            $this->addInvoiceRepository->addInvoice($payment->id);
 
             return $payment;
         } catch (Exception $error) {

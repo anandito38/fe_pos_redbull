@@ -7,11 +7,11 @@ use App\Models\Invoice;
 
 class AddInvoiceRepository
 {
-    public function addInvoice($data)
+    public function addInvoice($paymentId)
     {
         try {
-            // Create a new invoice record
-            $invoice = new Invoice($data);
+            $invoice = new Invoice();
+            $invoice->payment_id = $paymentId;
             $invoice->save();
 
             return $invoice;

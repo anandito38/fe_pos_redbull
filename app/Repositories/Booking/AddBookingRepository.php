@@ -29,6 +29,7 @@ class AddBookingRepository {
             $booking->quantity = 0;
             $booking->totalHarga = 0;
             $booking->customer_id = $bookingDTO->customer_id;
+            $booking->is_payment = false;
 
             $nameArray = explode(' ', $newCustomer["fullName"]);
             $tanggalFormatted = date_create_from_format('dmY', date('dmY'))->format('dmy');

@@ -22,9 +22,10 @@ class GetAllBookingWithCustomerRepository
                     'quantity' => $booking->quantity,
                     'kode' => $booking->kode,
                     'totalHarga' => $booking->totalHarga,
+                    'is_payment' => $booking->is_payment,
                     'customer_id' => $booking->customer_id,
                     'customer_nickname' => $booking->nickname,
-                    'customer_phoneNumber' => $booking->phoneNumber
+                    'customer_phoneNumber' => $booking->phoneNumber,
                 ];
 
                 array_push($bookingDTOs, $bookingDTO);
