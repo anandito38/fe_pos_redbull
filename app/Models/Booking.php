@@ -16,6 +16,7 @@ class Booking extends Model
         'totalHarga',
         'external_id',
         'customer_id',
+        'is_payment'
 
     ];
 

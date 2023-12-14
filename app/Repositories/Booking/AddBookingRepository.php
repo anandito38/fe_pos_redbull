@@ -6,14 +6,17 @@ use App\Repositories\Customer\GetCustomerByIdRepository;
 use Exception;
 use App\DTO\BookingDTO;
 use App\Models\Booking;
+use App\Repositories\Payment\AddPaymentRepository; // Import AddPaymentRepository
 
 class AddBookingRepository {
     public function __construct(
-        private GetCustomerByIdRepository $getCustomerByIdRepository
+        private GetCustomerByIdRepository $getCustomerByIdRepository,
+        private AddPaymentRepository $addPaymentRepository // Inject AddPaymentRepository
     )
     {}
+
     /**
-     * Register new Booking
+     * Register new Booking and add Payment.
      * @param BookingDTO $BookingDTO
      * @return BookingDTO
      */
@@ -26,6 +29,7 @@ class AddBookingRepository {
             $booking->quantity = 0;
             $booking->totalHarga = 0;
             $booking->customer_id = $bookingDTO->customer_id;
+            $booking->is_payment = false;
 
             $nameArray = explode(' ', $newCustomer["fullName"]);
             $tanggalFormatted = date_create_from_format('dmY', date('dmY'))->format('dmy');
@@ -34,11 +38,12 @@ class AddBookingRepository {
             $booking->kode = sprintf("%s/%s/%s/%s", str_replace(' ', '/', strtoupper($nameArray[0])), $lastDigits, $tanggalFormatted, $waktuFormatted);
 
             $booking->save();
+
+            $this->addPaymentRepository->addPayment($booking->id);
+
             return $bookingDTO;
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }
     }
 }
-
-?>

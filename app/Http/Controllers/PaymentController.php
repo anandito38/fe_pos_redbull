@@ -40,7 +40,7 @@ class PaymentController extends Controller
 
     public function editPayment(Request $request){
         try {
-            $resultData = $this->editPaymentService->editPayment($request);
+            $resultData = $this->editPaymentService->editPaymentService($request);
 
             toastr()->info('Payment updated successfully!', 'Payment', ['timeOut' => 3000]);
             return redirect('/payment')->with('status', 'success');
