@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Session;
 use App\Services\Auth\GetUserInfoService;
 use App\Services\Auth\RegisterService;
 use App\Services\Auth\LoginService;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -48,6 +50,24 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         try {
+            $userToken = $request->input('token');
+
+            $user = User::where('nickname', $request->nickname)->first();
+            if (!$user) {
+                toastr()->error('User not found.', 'Authentication', ['timeOut' => 3000]);
+                return view('Auth.login');
+            }
+
+            $existingToken = DB::table('personal_access_tokens')
+            ->where('tokenable_type', 'App\Models\User')
+            ->where('tokenable_id', $user->id)
+            ->value('token');
+
+            if ($existingToken && $existingToken !== $userToken) {
+                toastr()->error('This account already login', 'Authentication', ['timeOut' => 3000]);
+                return view('Auth.login');
+            }
+
             $resultData = $this->loginService->login($request);
 
             $getUserInfo = $this->getUserInfoService->getUserInfo($request);
@@ -62,6 +82,7 @@ class AuthController extends Controller
             }
         } catch (Exception $error) {
             toastr()->error('Wrong nickname or password!', 'Authentication', ['timeOut' => 3000]);
+            // toastr()->error($error->getMessage(), 'Authentication', ['timeOut' => 3000]);
             return view('Auth.login');
         }
     }
