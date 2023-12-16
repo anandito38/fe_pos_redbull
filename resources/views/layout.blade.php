@@ -26,6 +26,9 @@
 
 <body id="page-top">
     <div id="wrapper">
+        @php
+        $data1 = Session::get('userInfo');
+        @endphp
         @if (url('/404') != url()->current())
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -54,9 +57,11 @@
                 </a>
                 <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        @if ($data1->getRole() != 'Sales')
                         <a class="collapse-item" href="/admin">
                             <i class="fa-solid fa-user-gear" style="margin-right: 5px;"></i>ADMIN SHEET
                         </a>
+                        @endif
                         <a class="collapse-item" href="/customer">
                             <i class="fa-solid fa-user-group" style="margin-right: 5px;"></i>CUSTOMER SHEET
                         </a>
@@ -65,6 +70,7 @@
                 </div>
             </li>
 
+            @if ($data1->getRole() != 'Sales')
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStock"
                     aria-expanded="true" aria-controls="collapseStock">
@@ -85,6 +91,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
@@ -97,9 +104,11 @@
                         <a class="collapse-item" href="/book">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
                         </a>
+                        @if ($data1->getRole() != 'Sales')
                         <a class="collapse-item" href="/payment">
                             <i class="fa-solid fa-money-bill" style="margin-right: 5px;"></i>PAYMENT SHEET
                         </a>
+                        @endif
                         <a class="collapse-item" href="/invoice">
                             <i class="fa-solid fa-receipt" style="margin-right: 5px;"></i>INVOICE SHEET
                         </a>
@@ -225,12 +234,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title black-text bold" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Log out" below if you are ready to end your current session.</div>
+                    <div class="modal-body black-text">Select "Log out" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <a class="btn btn-primary" href="/logout">Log out</a>
