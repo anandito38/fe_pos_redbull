@@ -40,51 +40,51 @@ Route::group([], function(){
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->middleware('is_Auth','checkActivity');
+    })->middleware('is_Auth');
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/admin', [AdminController::class, 'getAllAdmin'])->name('admin');
     Route::post('/admin/add', [AdminController::class, 'addAdmin']);
     Route::put('/admin/edit', [AdminController::class, 'editAdmin']);
     Route::delete('/admin/delete', [AdminController::class, 'deleteAdmin']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/customer', [CustomerController::class, 'getAllCustomer'])->name('customer');
     Route::post('/customer/add', [CustomerController::class, 'addCustomer']);
     Route::put('/customer/edit', [CustomerController::class, 'editCustomer']);
     Route::delete('/customer/delete', [CustomerController::class, 'deleteCustomer']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/category', [CategoryController::class, 'getAllCategory'])->name('category');
     Route::post('/category/add', [CategoryController::class, 'addCategory']);
     Route::put('/category/edit', [CategoryController::class, 'editCategory']);
     Route::delete('/category/delete', [CategoryController::class, 'deleteCategory']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/vendors', [VendorController::class, 'getAllVendorWithCategory'])->name('vendors');
     Route::post('/vendors/add', [VendorController::class, 'addVendor']);
     Route::put('/vendors/edit', [VendorController::class, 'editVendor']);
     Route::delete('/vendors/delete', [VendorController::class, 'deleteVendor']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/product', [ProductController::class, 'getAllProduct'])->name('product');
     Route::post('/product/add', [ProductController::class, 'addProduct']);
     Route::put('/product/edit', [ProductController::class, 'editProduct']);
     Route::delete('/product/delete', [ProductController::class, 'deleteProduct']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/product/detail/{id}', [ProductDetailController::class, 'getAllProductDetail'])->name('productdetail');
     Route::post('/product/detail/add', [ProductDetailController::class, 'addProductDetail']);
     Route::delete('/product/detail/delete', [ProductDetailController::class, 'deleteProductDetail']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/book', [BookingController::class, 'getAllBookWithCustomer'])->name('book');
     Route::post('/book/add', [BookingController::class, 'addBook']);
     Route::put('/book/edit', [BookingController::class, 'editBook']);
@@ -92,18 +92,18 @@ Route::middleware('is_Auth','checkActivity')->group(function(){
     Route::post('/book/addcustomer', [BookingController::class, 'addCustomerBook']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/book/detail/{id}', [BookingDetailController::class, 'getAllBookingDetail'])->name('bookdetail');
     Route::post('/book/detail/add', [BookingDetailController::class, 'addBookingDetail']);
     Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookingDetail']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/payment', [PaymentController::class, 'getAllPaymentWithBooking'])->name('payment');
     Route::put('/payment/edit', [PaymentController::class, 'editPayment']);
 });
 
-Route::middleware('is_Auth','checkActivity')->group(function(){
+Route::middleware('is_Auth')->group(function(){
     Route::get('/invoice', [InvoiceController::class, 'getAllInvoiceWithPayment'])->name('invoice');
 });
 

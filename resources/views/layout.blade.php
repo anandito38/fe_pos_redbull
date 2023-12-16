@@ -26,7 +26,7 @@
 
 <body id="page-top">
     <div id="wrapper">
-
+        @if (url('/404') != url()->current())
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -122,7 +122,9 @@
             </div>
 
         </ul>
+        @endif
 
+        @if (url('/404') != url()->current())
         <div id="content-wrapper" class="d-flex flex-column">
 
             <div id="content">
@@ -212,7 +214,7 @@
             </div>
 
         </div>
-
+        @endif
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>

@@ -28,10 +28,10 @@
 
 <div class="container-fluid">
     <div class="text-center">
-        <div class="error mx-auto" data-text="404">404</div>
-        <p class="lead text-gray-800 mb-5">Page Not Found</p>
-        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-        <a href="/dashboard">&larr; Back to Dashboard</a>
+        <div class="error mx-auto black-text bold" data-text="404">404</div>
+        <p class="lead black-text bold mb-5">Page Not Found</p>
+        {{-- <p class="black-text bold mb-0">It looks like you found a glitch in the matrix...</p> --}}
+        <a href="/dashboard"> <button type="button" class="btn btn-secondary">&larr; Back to Dashboard</button></a>
     </div>
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
