@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,11 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::group([], function(){
     Route::get('/login', function () {
-        return view('Auth.login');
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        } else {
+            return view('Auth.login');
+        }
     })->middleware('is_TokenValid');
 
     Route::get('/dashboard', function () {

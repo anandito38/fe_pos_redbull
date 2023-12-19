@@ -28,7 +28,7 @@
 <body id="page-top">
     <div id="wrapper">
         @php
-        $data1 = Session::get('userInfo');
+        $data1 = $userInfo;
         @endphp
         @if (url('/404') != url()->current())
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">

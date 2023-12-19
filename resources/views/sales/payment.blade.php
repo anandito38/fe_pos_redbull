@@ -7,10 +7,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i
-                            class="fa-solid fa-eye"></i>
-                        Show All
-                    </button>
+                    <a href="/payment">
+                        <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i class="fa-solid fa-eye"></i>
+                            Show All
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
