@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\UpgradeToHttpsUnderNgrok::class,
         ],
 
         'api' => [
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_Auth' => \App\Http\Middleware\RedirectIfNotAuthenticated::class,
         'is_TokenValid' => \App\Http\Middleware\RedirectIfTokenValid::class,
+        'checkSessionToken' => \App\Http\Middleware\CheckUserActivity::class,
     ];
 }

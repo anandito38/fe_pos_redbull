@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +31,16 @@ Route::get('/', function () {
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
-    // Route::post('/register', 'register')->name('register');
     Route::get('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
 });
 
 Route::group([], function(){
     Route::get('/login', function () {
-        return view('Auth.login');
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        } else {
+            return view('Auth.login');
+        }
     })->middleware('is_TokenValid');
 
     Route::get('/dashboard', function () {
@@ -106,20 +110,17 @@ Route::middleware('is_Auth')->group(function(){
 
 Route::middleware('is_Auth')->group(function(){
     Route::get('/invoice', [InvoiceController::class, 'getAllInvoiceWithPayment'])->name('invoice');
+    Route::get('/invoice/detail/{id}', [InvoiceController::class, 'createInvoiceDetail']);
 });
 
 Route::group([], function(){
-    // Route::get('/payment', function () {
-    //     return view('booking.payment');
-    // });
-
     Route::get('/404', function () {
         return view('error.404');
     });
 
-    Route::get('/addcart', function () {
-        return view('booking.cart');
-    });
+    // Route::get('/addcart', function () {
+    //     return view('booking.cart');
+    // });
 
     Route::get('/checkout', function () {
         return view('booking.invoice');

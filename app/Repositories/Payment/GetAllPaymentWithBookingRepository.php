@@ -30,7 +30,7 @@ class GetAllPaymentWithBookingRepository
                     'users.nickname',
                 )->get();
 
-            // dd($payments);
+
             $paymentDTOs = [];
 
             foreach ($payments as $payment) {

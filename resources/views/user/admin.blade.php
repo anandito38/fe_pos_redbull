@@ -6,14 +6,18 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
+                    @if ($userInfo->getRole() == 'Owner')
                     <button type="button" class="btn-sm btn-success bold-text mt-4 float-right ml-2" data-toggle="modal"
                         data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
                         Add Admin
                     </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i
+                    @endif
+                    <a href="/admin">
+                        <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i
                             class="fa-solid fa-eye"></i>
                         Show All
                     </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -36,8 +40,10 @@
                             <th>Phone Number</th>
                             <th>Address</th>
                             <th>Role</th>
+                            @if ($userInfo->getRole() == 'Owner')
                             <th>Edit</th>
                             <th>Delete</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +59,7 @@
                             <td>{{$admin->phoneNumber}}</td>
                             <td>{{$admin->address}}</td>
                             <td>{{$admin->role}}</td>
+                            @if ($userInfo->getRole() == 'Owner')
                             <td>
                                 <!-- Button trigger modal Edit -->
                                 <button type="button" class="btn-sm btn-info" data-toggle="modal"
@@ -156,6 +163,7 @@
                                     </div>
                                 </div>
                             </td>
+                            @endif
                         </tr>
                         @php
                         $iterator++;

@@ -59,5 +59,23 @@ class UserSeeder extends Seeder
             'role' => 'Administrator'
         ]);
 
+        User::create([
+            'fullName' => 'Owner',
+            'nickname' => 'Owner',
+            'password' => Hash::make('12345678'),
+            'phoneNumber' => '081234555555',
+            'address' => 'Jl. Sukabirus No 65',
+            'role' => 'Owner'
+        ]);
+
+        User::create([
+            'fullName' => 'Sales',
+            'nickname' => 'Sales',
+            'password' => Hash::make('12345678'),
+            'phoneNumber' => '081234555666',
+            'address' => 'Jl. Sukabirus No 65',
+            'role' => 'Sales'
+        ]);
+
     }
 }
