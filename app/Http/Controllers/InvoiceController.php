@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
+use App\Services\Invoice\GetAllInvoiceWithPaymentService;
 
 class InvoiceController extends Controller
 {
     public function __construct(
-
+        private GetAllInvoiceWithPaymentService $getAllInvoiceWithPaymentService
     ) {}
 
     /**
@@ -19,11 +20,10 @@ class InvoiceController extends Controller
      */
     public function getAllInvoiceWithPayment(Request $request) {
         try {
-            // $resultData = $this->getAllBookingWithCustomerService->getAllBookingWithCustomer($request);
-            // $dataCustomer = $this->getAllCustomerService->getAllCustomer($request);
-
-            // return view('sales.booking', ['bookingInfo' => $resultData, 'customerInfo' => $dataCustomer]);
-
+            $resultData = $this->getAllInvoiceWithPaymentService->GetAllInvoice($request);
+            $invoiceInfo = array_values($resultData);
+            // dd($invoiceInfo);
+            return view('sales.invoice', ['invoiceInfo' => $invoiceInfo]);
         } catch (Exception $error) {
             return response()->json([
                 'status' => 'error',
@@ -31,5 +31,5 @@ class InvoiceController extends Controller
             ])->setStatusCode(404);
         }
     }
-
 }
+
