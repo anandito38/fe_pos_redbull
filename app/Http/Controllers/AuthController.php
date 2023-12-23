@@ -12,6 +12,7 @@ use App\Services\Auth\RegisterService;
 use App\Services\Auth\LoginService;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -61,11 +62,26 @@ class AuthController extends Controller
             $existingToken = DB::table('personal_access_tokens')
             ->where('tokenable_type', 'App\Models\User')
             ->where('tokenable_id', $user->id)
-            ->value('token');
+            ->first();
 
-            if ($existingToken && $existingToken !== $userToken) {
-                toastr()->error('This account already login', 'Authentication', ['timeOut' => 3000]);
-                return view('Auth.login');
+            if ($existingToken) {
+                $tokenCreatedAt = $existingToken->created_at;
+                $tokenExpirationTime = Carbon::parse($tokenCreatedAt)->addMinutes(15);
+
+                if ($tokenExpirationTime > now()){
+                    toastr()->error('This account already logged in.', 'Authentication', ['timeOut' => 3000]);
+                    return view('Auth.login');
+                }
+
+                if ($tokenExpirationTime < now()) {
+                    DB::table('personal_access_tokens')
+                        ->where('id', $existingToken->id)
+                        ->delete();
+
+                    toastr()->error('Your session has expired. Please login again.', 'Authentication', ['timeOut' => 3000]);
+                    return view('Auth.login');
+                }
+
             }
 
             $resultData = $this->loginService->login($request);
@@ -92,7 +108,7 @@ class AuthController extends Controller
             $user = $request->user();
 
             if ($user) {
-                $user->tokens()->delete();
+                $user->tokens()->where('name', 'auth_token')->delete();
 
                 Session::forget('userInfo');
                 Session::flush();
