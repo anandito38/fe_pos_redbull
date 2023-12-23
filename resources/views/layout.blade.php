@@ -3,11 +3,13 @@
 
 <head>
 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>KANG BAKERY</title>
 
@@ -25,7 +27,10 @@
 
 <body id="page-top">
     <div id="wrapper">
-
+        @php
+        $data1 = $userInfo;
+        @endphp
+        @if (url('/404') != url()->current())
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
@@ -53,9 +58,11 @@
                 </a>
                 <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        @if ($data1->getRole() != 'Sales')
                         <a class="collapse-item" href="/admin">
                             <i class="fa-solid fa-user-gear" style="margin-right: 5px;"></i>ADMIN SHEET
                         </a>
+                        @endif
                         <a class="collapse-item" href="/customer">
                             <i class="fa-solid fa-user-group" style="margin-right: 5px;"></i>CUSTOMER SHEET
                         </a>
@@ -64,6 +71,7 @@
                 </div>
             </li>
 
+            @if ($data1->getRole() != 'Sales')
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStock"
                     aria-expanded="true" aria-controls="collapseStock">
@@ -84,6 +92,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSales"
@@ -96,9 +105,11 @@
                         <a class="collapse-item" href="/book">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
                         </a>
+                        @if ($data1->getRole() != 'Sales')
                         <a class="collapse-item" href="/payment">
                             <i class="fa-solid fa-money-bill" style="margin-right: 5px;"></i>PAYMENT SHEET
                         </a>
+                        @endif
                         <a class="collapse-item" href="/invoice">
                             <i class="fa-solid fa-receipt" style="margin-right: 5px;"></i>INVOICE SHEET
                         </a>
@@ -121,7 +132,9 @@
             </div>
 
         </ul>
+        @endif
 
+        @if (url('/404') != url()->current())
         <div id="content-wrapper" class="d-flex flex-column">
 
             <div id="content">
@@ -211,7 +224,7 @@
             </div>
 
         </div>
-
+        @endif
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
@@ -222,12 +235,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title black-text bold" id="exampleModalLabel">Ready to Leave?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Log out" below if you are ready to end your current session.</div>
+                    <div class="modal-body black-text">Select "Log out" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <a class="btn btn-primary" href="/logout">Log out</a>

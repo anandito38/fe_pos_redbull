@@ -11,9 +11,11 @@
                         data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
                         Add Vendor
                     </button>
-                    <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i class="fa-solid fa-eye"></i>
-                        Show All
-                    </button>
+                    <a href="/vendors">
+                        <button type="button" class="btn-sm btn-warning bold-text mt-4 float-right"><i class="fa-solid fa-eye"></i>
+                            Show All
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

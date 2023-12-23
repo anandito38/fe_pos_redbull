@@ -20,4 +20,14 @@ class Memilih extends Model
         'idBook'
     ];
 
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class, 'idBook', 'id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'idProduct', 'id');
+    }
+
 }
