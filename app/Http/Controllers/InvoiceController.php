@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Exception;
 use App\Services\Invoice\GetAllInvoiceWithPaymentService;
+use App\Services\Invoice\GetDetailInvoiceService;
 
 class InvoiceController extends Controller
 {
     public function __construct(
-        private GetAllInvoiceWithPaymentService $getAllInvoiceWithPaymentService
+        private GetAllInvoiceWithPaymentService $getAllInvoiceWithPaymentService,
+        private GetDetailInvoiceService $getDetailInvoiceService
     ) {}
 
     /**
@@ -22,8 +24,22 @@ class InvoiceController extends Controller
         try {
             $resultData = $this->getAllInvoiceWithPaymentService->GetAllInvoice($request);
             $invoiceInfo = array_values($resultData);
-            // dd($invoiceInfo);
+
             return view('sales.invoice', ['invoiceInfo' => $invoiceInfo]);
+        } catch (Exception $error) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $error->getMessage(),
+            ])->setStatusCode(404);
+        }
+    }
+
+    public function createInvoiceDetail($id){
+        try {
+            $resultData = $this->getDetailInvoiceService->getInvoiceDetailsById($id);
+            $invoiceInfo = array_values($resultData);
+
+            return view('sales.createInvoice', ['invoiceInfo' => $invoiceInfo]);
         } catch (Exception $error) {
             return response()->json([
                 'status' => 'error',

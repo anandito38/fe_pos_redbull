@@ -52,7 +52,6 @@
                                     <td>Rp{{ number_format($invoice['booking']['totalHarga'], 0, ',', '.') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($invoice['booking']['created_at'])->format('d M Y H:i:s') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($invoice['payment']['updated_at'])->format('d M Y H:i:s') }}</td>
-
                                     <td>
                                         <a href="/invoice/detail/{{ $invoice['id'] }}">
                                             <button type="button" class="btn-sm btn-success">

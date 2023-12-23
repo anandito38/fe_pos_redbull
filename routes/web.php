@@ -110,6 +110,7 @@ Route::middleware('is_Auth')->group(function(){
 
 Route::middleware('is_Auth')->group(function(){
     Route::get('/invoice', [InvoiceController::class, 'getAllInvoiceWithPayment'])->name('invoice');
+    Route::get('/invoice/detail/{id}', [InvoiceController::class, 'createInvoiceDetail']);
 });
 
 Route::group([], function(){
@@ -117,9 +118,9 @@ Route::group([], function(){
         return view('error.404');
     });
 
-    Route::get('/addcart', function () {
-        return view('booking.cart');
-    });
+    // Route::get('/addcart', function () {
+    //     return view('booking.cart');
+    // });
 
     Route::get('/checkout', function () {
         return view('booking.invoice');
