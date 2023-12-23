@@ -22,8 +22,12 @@ class GetAllBookingDetailRepository
                 throw new Exception('Booking not found');
             }
 
-            // Mengambil ID semua produk yang terkait dengan booking dari tabel Memilih
-            $selectedProductIds = Memilih::where('idBook', $bookingId)->pluck('idProduct')->toArray();
+            $selectedProducts = Memilih::where('idBook', $bookingId)
+                ->select('idProduct', 'qtyMemilih')
+                ->get();
+
+
+            $selectedProductIds = $selectedProducts->pluck('idProduct')->toArray();
 
             // Mengambil semua data produk berdasarkan ID yang ditemukan di atas
             $productData = Product::whereIn('id', $selectedProductIds)->get();
@@ -31,6 +35,7 @@ class GetAllBookingDetailRepository
             return [
                 'booking' => $booking,
                 'products' => $productData,
+                'selectedProducts' => $selectedProducts,
             ];
         } catch (Exception $error) {
             throw new Exception($error->getMessage());

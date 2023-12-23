@@ -14,7 +14,7 @@
                     <h5 class="mb-2 text-gray-700 bold-text">CODE        : {{$bookingInfo["kode"]}}</h5>
                     <h5 class="mb-2 text-gray-700 bold-text">NICKNAME    : {{$bookingInfo["nickname"]}}</h5>
                     <h5 class="mb-2 text-gray-700 bold-text">PHONE NUMBER: {{$bookingInfo["phoneNumber"]}}</h5>
-                    <h5 class="mb-2 text-gray-700 bold-text">TOTAL PRICE: Rp{{ number_format(1000000, 0, ',', '.') }}</h5>
+                    <h5 class="mb-2 text-gray-700 bold-text">TOTAL PRICE: Rp{{ number_format($bookingInfo["totalHarga"], 0, ',', '.') }}</h5>
                 </div>
             </div>
             <button type="button" class="btn-sm btn-success bold-text float-right ml-2" data-toggle="modal"
@@ -43,7 +43,7 @@
                             <th>Product Name</th>
                             <th>Selling Price</th>
                             <th>Quantity</th>
-                            <th>Total Price</th>
+                            <th>Total Product Price</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -52,14 +52,24 @@
                         @php
                             $iterator = 1;
                         @endphp
-                        @foreach ($productsInfo as $product)
+                        @foreach ($productsInfo as $index => $product)
+                        @if(isset($qtyMemilih[$index]))
                         <tr>
                             <td>{{$iterator}}</td>
                             <td>{{$product["kode"]}}</td>
                             <td>{{$product["nama"]}}</td>
                             <td>Rp{{ number_format($product["hargaJual"], 0, ',', '.') }}</td>
-                            <td>5</td>
-                            <td>Rp{{ number_format(250000, 0, ',', '.') }}</td>
+                            <td>
+                                <form action="" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="input-group">
+                                        <input type="number" name="quantity" class="form-control form-control-sm" value="{{ $qtyMemilih[$index]['qtyMemilih'] }}">
+                                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>Rp{{ number_format($product["hargaJual"]*$qtyMemilih[$index]['qtyMemilih'], 0, ',', '.') }}</td>
                             <td>
                                 <!-- Button trigger modal Delete -->
                                 <button type="button" class="btn-sm btn-danger" data-toggle="modal"
@@ -107,6 +117,7 @@
                         @php
                             $iterator++;
                         @endphp
+                        @endif
                         @endforeach
                         @endif
                     </tbody>
@@ -145,6 +156,11 @@
                             <option value="{{$prod->getId()}}" name="idProduct"> {{"[".$prod->getKode()."] ".$prod->getNama()}}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mb-3 black-text bold">
+                        <label for="InputWarna" class="form-label">Quantity</label>
+                        <input type="number" id="qtyMemilih" name="qtyMemilih" class="form-control" placeholder="-- Enter Quantity --">
                     </div>
                     <button type="submit" class="btn btn-success float-right">Submit</button>
                 </form>

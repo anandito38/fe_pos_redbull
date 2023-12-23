@@ -17,7 +17,8 @@ class Memilih extends Model
 
     protected $fillable = [
         'idProduct',
-        'idBook'
+        'idBook',
+        'qtyMemilih',
     ];
 
     public function booking()

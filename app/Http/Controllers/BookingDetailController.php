@@ -28,8 +28,9 @@ class BookingDetailController extends Controller
 
             $bookingData = $resultData['booking'];
             $productsData = $resultData['products'];
-            // dd($bookingData, $productsData, $productData);
-            return view('sales.bookingdetail', ['bookingInfo' => $bookingData, 'productsInfo' => $productsData, 'dataProduct' => $productData]);
+            $qtyMemilih = $resultData['selectedProducts'];
+
+            return view('sales.bookingdetail', ['bookingInfo' => $bookingData, 'productsInfo' => $productsData, 'dataProduct' => $productData, 'qtyMemilih' => $qtyMemilih]);
 
         } catch (Exception $error) {
             return response()->json([
@@ -43,12 +44,13 @@ class BookingDetailController extends Controller
         try {
             $idBook = $request->input('idBook');
             $idProduct = $request->input('idProduct');
+            $qtyMemilih = $request->input('qtyMemilih');
 
             if ($idProduct == 0) {
                 throw new Exception("Please select product!");
             }else{
 
-                $resultData = $this->addBookingDetailService->AddBookingDetail($idBook, $idProduct);
+                $resultData = $this->addBookingDetailService->AddBookingDetail($idBook, $idProduct, $qtyMemilih);
 
                 toastr()->success('Product added successfully!', 'Booking Detail', ['timeOut' => 3000]);
                 return redirect('/book/detail/'.$idBook)->with('status', 'success');

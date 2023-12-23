@@ -11,10 +11,10 @@ class AddBookingDetailService
         private AddBookingDetailRepository $addBookingDetailRepository
     ) {}
 
-    public function AddBookingDetail(int $idBooking, int $idProduct)
+    public function AddBookingDetail(int $idBooking, int $idProduct, int $qtyMemilih)
     {
         try {
-            return $this->addBookingDetailRepository->AddBookingDetail($idBooking, $idProduct);
+            return $this->addBookingDetailRepository->AddBookingDetail($idBooking, $idProduct, $qtyMemilih);
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
         }

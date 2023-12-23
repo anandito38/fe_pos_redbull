@@ -11,6 +11,7 @@ class CreateMemilihsTable extends Migration
         Schema::create('memilihs', function (Blueprint $table) {
             $table->unsignedBigInteger('idBook');
             $table->unsignedBigInteger('idProduct');
+            $table->integer('qtyMemilih');
 
             $table->foreign('idBook')->references('id')->on('bookings')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idProduct')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');

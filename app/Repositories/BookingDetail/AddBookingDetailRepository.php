@@ -9,7 +9,7 @@ use App\Models\Product;
 
 class AddBookingDetailRepository
 {
-    public function AddBookingDetail(int $idBooking, int $idProduct)
+    public function AddBookingDetail(int $idBooking, int $idProduct, int $qty)
     {
         try {
             $book = Booking::find($idBooking);
@@ -19,20 +19,25 @@ class AddBookingDetailRepository
                 throw new Exception('Booking or Product not found');
             }
 
-            // Cek apakah relasi product dan vendor sudah ada
             $existingRelation = Memilih::where('idBook', $idBooking)
                 ->where('idProduct', $idProduct)
                 ->first();
 
             if ($existingRelation) {
-                throw new Exception('The product already exists in the booking');
+                throw new Exception('The product already exists, updated the quantity');
             }
 
-            // Tambahkan relasi product dan vendor ke tabel Memproduksi
             $memilih = new Memilih();
             $memilih->idBook = $idBooking;
             $memilih->idProduct = $idProduct;
+            $memilih->qtyMemilih = $qty;
             $memilih->save();
+
+            $product->quantity -= $qty;
+            $product->save();
+
+            $book->totalHarga += $product->hargaJual * $qty;
+            $book->save();
 
             return $memilih;
         } catch (Exception $error) {

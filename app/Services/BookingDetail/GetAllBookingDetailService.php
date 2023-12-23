@@ -22,9 +22,14 @@ class GetAllBookingDetailService
                 return collect($vendor->getAttributes())->toArray();
             })->toArray();
 
+            $selectedProducts = collect($result['selectedProducts'])->map(function ($product) {
+                return collect($product->getAttributes())->toArray();
+            })->toArray();
+
             return [
                 'booking' => $bookingData,
                 'products' => $productsData,
+                'selectedProducts' => $selectedProducts,
             ];
         } catch (Exception $error) {
             throw new Exception($error->getMessage());
