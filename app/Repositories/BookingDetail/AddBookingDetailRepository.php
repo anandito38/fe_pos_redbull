@@ -37,6 +37,7 @@ class AddBookingDetailRepository
             $product->save();
 
             $book->totalHarga += $product->hargaJual * $qty;
+            $book->quantity += $qty;
             $book->save();
 
             return $memilih;

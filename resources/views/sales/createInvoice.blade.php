@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{{-- {{dd($invoiceInfo)}} --}}
 <head>
     <meta charset="utf-8" />
     <title>Kang Bakery</title>
@@ -8,12 +8,13 @@
 </head>
 
 <body>
-    @if (isset($invoiceInfo))
+    @if (count($invoiceInfo) > 0)
+    @foreach ($invoiceInfo as $invoice)
     <div class="invoice-box">
         <h2>Kang Bakery</h2>
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
-                <td colspan="2">
+                <td colspan="3">
                     <table>
                         <tr>
                             <td class="title">
@@ -21,9 +22,9 @@
                             </td>
 
                             <td>
-                                Invoice : {{ $invoiceInfo[0]['bookings'][2]['kode'] }}<br />
-                                Created : {{ \Carbon\Carbon::parse($invoiceInfo[0]['bookings'][2]['created_at'])->isoFormat('DD MMMM, YYYY - HH:mm:ss') }}<br />
-                                Paid : {{ \Carbon\Carbon::parse($invoiceInfo[0]['payment']['updated_at'])->isoFormat('DD MMMM, YYYY - HH:mm:ss') }}
+                                <strong>Invoice</strong> : {{ $invoice['bookings'][$invoice['payment']['id']]['kode'] }}<br />
+                                <strong>Created</strong> : {{ \Carbon\Carbon::parse($invoice['bookings'][$invoice['payment']['id']]['created_at'])->isoFormat('DD MMMM, YYYY - HH:mm:ss') }}<br />
+                                <strong>Paid</strong> : {{ \Carbon\Carbon::parse($invoice['payment']['updated_at'])->isoFormat('DD MMMM, YYYY - HH:mm:ss') }}
                             </td>
                         </tr>
                     </table>
@@ -31,21 +32,21 @@
             </tr>
 
             <tr class="information">
-                <td colspan="2">
+                <td colspan="3">
                     <table>
                         <tr>
                             <td>
-                                Verified by :<br />
-                                {{ $invoiceInfo[0]['payment']['admin']['nickname'] }}<br />
-                                {{ $invoiceInfo[0]['payment']['admin']['phoneNumber'] }}<br />
-                                {{ $invoiceInfo[0]['payment']['admin']['role'] }}
+                                <strong>Verified by :</strong><br />
+                                {{ $invoice['payment']['admin']['nickname'] }}<br />
+                                {{ $invoice['payment']['admin']['phoneNumber'] }}<br />
+                                {{ $invoice['payment']['admin']['role'] }}
                             </td>
 
                             <td>
-                                Customer :<br />
-                                {{ $invoiceInfo[0]['bookings'][2]['customer']['fullname'] }}<br />
-                                {{ $invoiceInfo[0]['bookings'][2]['customer']['phoneNumber'] }}<br />
-                                {{ $invoiceInfo[0]['bookings'][2]['customer']['address'] }}
+                                <strong>Customer :</strong><br />
+                                {{ $invoice['bookings'][$invoice['payment']['id']]['customer']['fullname'] }}<br />
+                                {{ $invoice['bookings'][$invoice['payment']['id']]['customer']['phoneNumber'] }}<br />
+                                {{ $invoice['bookings'][$invoice['payment']['id']]['customer']['address'] }}
                             </td>
                         </tr>
                     </table>
@@ -55,35 +56,41 @@
             <tr class="heading">
                 <td>Payment Method</td>
                 <td></td>
+                <td></td>
             </tr>
 
             <tr class="details">
-                <td>{{ $invoiceInfo[0]['payment']['metode'] }}</td>
+                <td>{{ $invoice['payment']['metode'] }}</td>
             </tr>
 
-            <tr class="heading">
+            <tr class="heading text-center">
                 <td>Product</td>
+                <td>Qty</td>
                 <td>Price</td>
             </tr>
 
-            @foreach ($invoiceInfo[0]['bookings'][2]['memilihs'] as $dataProduct)
+            @foreach ($invoice['bookings'][$invoice['payment']['id']]['memilihs'] as $product)
             <tr class="item">
-                <td>{{ $dataProduct['kode'] }} - {{ $dataProduct['nama'] }}</td>
-                <td>Rp{{ number_format(5000, 0, ',', '.') }}</td>
+                <td>[{{ $product['kode'] }}] - {{ $product['nama'] }}</td>
+                <td>{{ $product['qty'] }}</td>
+                <td>Rp{{ number_format($product['qty'] * $product['hargaJual'], 0, ',', '.') }}</td>
             </tr>
             @endforeach
 
             <tr class="item last">
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
 
             <tr class="total">
                 <td></td>
-                <td>Rp{{ number_format($invoiceInfo[0]['bookings'][2]['totalHarga'], 0, ',', '.') }}</td>
+                <td>Total Price :</td>
+                <td>Rp{{ number_format($invoice['bookings'][$invoice['payment']['id']]['totalHarga'], 0, ',', '.') }}</td>
             </tr>
         </table>
     </div>
+    @endforeach
     @endif
 </body>
 

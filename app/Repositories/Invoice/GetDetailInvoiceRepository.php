@@ -36,7 +36,9 @@ class GetDetailInvoiceRepository
                     'customers.address AS customer_address',
                     'bookings.created_at AS book_created_at',
                     'products.kode AS product_kode',
-                    'products.nama AS product_nama'
+                    'products.nama AS product_nama',
+                    'products.hargaJual AS product_hargaJual',
+                    'memilihs.qtyMemilih AS memilih_qty'
                 )
                 ->where('invoices.id', $id)
                 ->get();
@@ -59,10 +61,6 @@ class GetDetailInvoiceRepository
                     'bookings' => [],
                 ];
 
-                if (!isset($invoiceDTOs[$invoice->invoice_id])) {
-                    $invoiceDTOs[$invoice->invoice_id] = $invoiceDTO;
-                }
-
                 $bookingData = [
                     'id' => $invoice->booking_id,
                     'kode' => $invoice->kode,
@@ -76,27 +74,21 @@ class GetDetailInvoiceRepository
                     'memilihs' => [],
                 ];
 
-                if (!empty($invoice->product_kode)) {
-                    $memilihData = [
-                        'kode' => $invoice->product_kode,
-                        'nama' => $invoice->product_nama,
-
-                    ];
-                    $bookingData['memilihs'][] = $memilihData;
+                if (!isset($invoiceDTOs[$invoice->invoice_id])) {
+                    $invoiceDTOs[$invoice->invoice_id] = $invoiceDTO;
                 }
 
-                if (!empty($bookingData['memilihs'])) {
-                    $index = $invoice->invoice_id;
-                    if (!array_key_exists($index, $invoiceDTOs)) {
-                        $invoiceDTOs[$index] = $invoiceDTO;
-                    }
-                    $bookingKey = $bookingData['id'];
-                    if (!array_key_exists($bookingKey, $invoiceDTOs[$index]['bookings'])) {
-                        $invoiceDTOs[$index]['bookings'][$bookingKey] = $bookingData;
-                    } else {
-                        $invoiceDTOs[$index]['bookings'][$bookingKey]['memilihs'][] = $memilihData;
-                    }
+                $bookingId = $bookingData['id'];
+                if (!isset($invoiceDTOs[$invoice->invoice_id]['bookings'][$bookingId])) {
+                    $invoiceDTOs[$invoice->invoice_id]['bookings'][$bookingId] = $bookingData;
                 }
+
+                $invoiceDTOs[$invoice->invoice_id]['bookings'][$bookingId]['memilihs'][] = [
+                    'kode' => $invoice->product_kode,
+                    'nama' => $invoice->product_nama,
+                    'hargaJual' => $invoice->product_hargaJual,
+                    'qty' => $invoice->memilih_qty,
+                ];
             }
 
             return $invoiceDTOs;
