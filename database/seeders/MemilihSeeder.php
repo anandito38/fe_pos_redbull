@@ -18,11 +18,13 @@ class MemilihSeeder extends Seeder
         Memilih::create([
             'idProduct' => 1,
             'idBook' => $BookId,
+            'qtyMemilih' => 2,
         ]);
 
         Memilih::create([
             'idProduct' => 2,
             'idBook' => $BookId,
+            'qtyMemilih' => 3,
         ]);
     }
 }
