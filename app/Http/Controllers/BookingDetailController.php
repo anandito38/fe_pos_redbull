@@ -10,6 +10,7 @@ use App\Services\Product\GetAllProductService;
 use App\Services\BookingDetail\GetAllBookingDetailService;
 use App\Services\BookingDetail\AddBookingDetailService;
 use App\Services\BookingDetail\DeleteBookingDetailService;
+use App\Services\BookingDetail\EditBookingDetailService;
 
 class BookingDetailController extends Controller
 {
@@ -18,7 +19,8 @@ class BookingDetailController extends Controller
         private GetAllProductService $getAllProductService,
         private GetAllBookingDetailService $getAllBookingDetailService,
         private AddBookingDetailService $addBookingDetailService,
-        private DeleteBookingDetailService $deleteBookingDetailService
+        private DeleteBookingDetailService $deleteBookingDetailService,
+        private EditBookingDetailService $editBookingDetailService
     ) {}
 
     public function getAllBookingDetail(Request $request, $bookingId) {
@@ -55,6 +57,22 @@ class BookingDetailController extends Controller
                 toastr()->success('Product added successfully!', 'Booking Detail', ['timeOut' => 3000]);
                 return redirect('/book/detail/'.$idBook)->with('status', 'success');
             }
+        } catch (Exception $error) {
+            toastr()->error($error->getMessage(), 'Booking Detail', ['timeOut' => 3000]);
+            return redirect('/book/detail/'.$idBook)->with('status', $error->getMessage());
+        }
+    }
+
+    public function editBookingDetail(Request $request){
+        try {
+            $idBook = $request->input('idBook');
+            $idProduct = $request->input('idProduct');
+            $qtyMemilih = $request->input('qtyMemilih');
+
+            $resultData = $this->editBookingDetailService->editBookingDetail($idBook, $idProduct, $qtyMemilih);
+
+            toastr()->info('Product quantity edited successfully!', 'Booking Detail', ['timeOut' => 3000]);
+            return redirect('/book/detail/'.$idBook)->with('status', 'success');
         } catch (Exception $error) {
             toastr()->error($error->getMessage(), 'Booking Detail', ['timeOut' => 3000]);
             return redirect('/book/detail/'.$idBook)->with('status', $error->getMessage());

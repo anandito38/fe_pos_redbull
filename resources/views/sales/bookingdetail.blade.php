@@ -60,11 +60,15 @@
                             <td>{{$product["nama"]}}</td>
                             <td>Rp{{ number_format($product["hargaJual"], 0, ',', '.') }}</td>
                             <td>
-                                <form action="" method="POST">
+                                <form action="/book/detail/edit" method="POST">
                                     @csrf
                                     @method('PUT')
+                                    <input type="hidden" id="idBook" name="idBook" class="form-control"
+                                        value="{{$bookingInfo["id"]}}">
+                                    <input type="hidden" id="idProduct" name="idProduct" class="form-control"
+                                        value="{{$product["id"]}}">
                                     <div class="input-group">
-                                        <input type="number" name="quantity" class="form-control form-control-sm" value="{{ $qtyMemilih[$index]['qtyMemilih'] }}">
+                                        <input type="number" name="qtyMemilih" class="form-control form-control-sm" value="{{ $qtyMemilih[$index]['qtyMemilih'] }}">
                                         <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                     </div>
                                 </form>

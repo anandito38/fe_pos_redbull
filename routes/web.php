@@ -100,6 +100,7 @@ Route::middleware('is_Auth')->group(function(){
 Route::middleware('is_Auth')->group(function(){
     Route::get('/book/detail/{id}', [BookingDetailController::class, 'getAllBookingDetail'])->name('bookdetail');
     Route::post('/book/detail/add', [BookingDetailController::class, 'addBookingDetail']);
+    Route::put('/book/detail/edit', [BookingDetailController::class, 'editBookingDetail']);
     Route::delete('/book/detail/delete', [BookingDetailController::class, 'deleteBookingDetail']);
 });
 
