@@ -21,9 +21,11 @@
                 data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
                 Add Product
             </button>
-            <button type="button" class="btn-sm btn-warning bold-text float-right"><i class="fa-solid fa-eye"></i>
-                Show All
-            </button>
+            <a href="/book/detail/{{$bookingInfo["id"]}}">
+                <button type="button" class="btn-sm btn-warning bold-text float-right"><i class="fa-solid fa-eye"></i>
+                    Show All
+                </button>
+            </a>
         </div>
 
     </div>

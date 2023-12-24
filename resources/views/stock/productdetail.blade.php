@@ -19,9 +19,11 @@
                 data-target="#exampleModalCenterAdd"><i class="fa-solid fa-pencil"></i>
                 Add Material
             </button>
-            <button type="button" class="btn-sm btn-warning bold-text float-right"><i class="fa-solid fa-eye"></i>
-                Show All
-            </button>
+            <a href="/product/detail/{{$productInfo["id"]}}">
+                <button type="button" class="btn-sm btn-warning bold-text float-right"><i class="fa-solid fa-eye"></i>
+                    Show All
+                </button>
+            </a>
         </div>
 
     </div>
