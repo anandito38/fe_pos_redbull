@@ -12,6 +12,10 @@ class EditBookingDetailRepository
     public function EditBookingDetail(int $idBooking, int $idProduct, int $qty)
     {
         try {
+            if($qty <= 0){
+                throw new Exception('Quantity must be greater than 0');
+            }
+
             $relation = Memilih::where('idBook', $idBooking)
                 ->where('idProduct', $idProduct)
                 ->first();
@@ -33,6 +37,10 @@ class EditBookingDetailRepository
 
                 $book = Booking::find($idBooking);
                 $product = Product::find($idProduct);
+
+                if($product->quantity < $qty){
+                    throw new Exception('Product quantity is not enough');
+                }
 
                 $book->totalHarga = ($book->totalHarga - ($tempQty * $product->hargaJual)) + $product->hargaJual * $qty;
                 $book->quantity = ($book->quantity - $tempQty) + $qty;

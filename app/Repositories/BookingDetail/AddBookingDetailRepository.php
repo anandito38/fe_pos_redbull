@@ -15,6 +15,10 @@ class AddBookingDetailRepository
             $book = Booking::find($idBooking);
             $product = Product::find($idProduct);
 
+            if($qty <= 0){
+                throw new Exception('Quantity must be greater than 0');
+            }
+
             if (!$book || !$product) {
                 throw new Exception('Booking or Product not found');
             }
@@ -25,6 +29,10 @@ class AddBookingDetailRepository
 
             if ($existingRelation) {
                 throw new Exception('The product already exists, updated the quantity');
+            }
+
+            if($product->quantity < $qty){
+                throw new Exception('The quantity is not enough');
             }
 
             $memilih = new Memilih();

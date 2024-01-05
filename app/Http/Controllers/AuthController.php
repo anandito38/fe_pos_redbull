@@ -66,7 +66,7 @@ class AuthController extends Controller
 
             if ($existingToken) {
                 $tokenCreatedAt = $existingToken->created_at;
-                $tokenExpirationTime = Carbon::parse($tokenCreatedAt)->addMinutes(15);
+                $tokenExpirationTime = Carbon::parse($tokenCreatedAt)->addMinutes(0.5);
 
                 if ($tokenExpirationTime > now()){
                     toastr()->error('This account already logged in.', 'Authentication', ['timeOut' => 3000]);
